@@ -12,7 +12,7 @@ function init() {
 	const url=window.location.href;
 	console.log(url);
 	const param=getQueryParams(url);
-	const example_url=(typeof param["example_url"]=== 'undefined'?'https://raw.githubusercontent.com/EddyTheCo/qmlonline/main/examples/simple':param["example_url"]);
+	const example_url=(typeof param["example_url"]=== 'undefined'?'https://raw.githubusercontent.com/EddyTheCo/qmlonline/main/wasm/examples/simple':param["example_url"]);
 	const wasm_url=(typeof param["wasm_url"]=== 'undefined'?'':param["wasm_url"]);
 	const app_name=(typeof param["app_name"]=== 'undefined'?'appqmlonline':param["app_name"]);
 	console.log(example_url);
