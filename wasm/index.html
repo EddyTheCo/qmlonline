@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<link href='https://fonts.googleapis.com/css?family=Allerta Stencil' rel='stylesheet'>
+		<link rel="stylesheet" href="style.css">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+		<script type="text/javascript" src="qtloader.js"></script>
+		<script type="text/javascript" src="appqmlonline.js"></script>
+		<script type="text/javascript" src="js/ace.js"></script>
+		<script type="text/javascript" src="js/ext-beautify.js"></script>
+		<script type="text/javascript" src="js/ext-language_tools.js"></script>
+		<script type="text/javascript" src="js/mode-qml.js"></script>
+		<script type="text/javascript" src="js/theme-chaos.js"></script>
+		<script type="text/javascript" src="js/scripts.js"></script>
+
+		<title>QML online</title>
+	</head>
+	<body onload="init();">
+		<div class="pair">
+			<div class="codeArea">
+				<div id="editor" >
+				</div>
+			</div>
+			<div class="playArea" >
+				<figure id="qtspinner">
+					<center >
+						<img id="logo" src="img/qtlogo.svg" ></img>
+						<div id="qtstatus"></div>
+					</center>
+				</figure>
+				<canvas id="qtcanvas" oncontextmenu="event.preventDefault()" contenteditable="true"></canvas>
+			</div>
+		</div>
+		<footer>
+			<div class="fcont">
+				<div class="fdiv" >
+					Developed by <a href="https://eddytheco.github.io/" target="_blank" > Eddy</a>
+				</div>
+				<div class="fdiv">
+					<div class="fdivsub">
+						<div class="ffdiv">
+							<span>Powered by</span>
+					</div>
+						<div class="ffdiv">
+						<a href="https://github.com/" target="_blank"><img id="gitHublogo" src="img/gitHublogo.png"></img></a>
+						</div>
+						<div class="ffdiv">
+						<a href="https://www.qt.io/" target="_blank"><img id="qtlogo" src="img/qtlogo.svg"></img></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>

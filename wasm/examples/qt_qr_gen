@@ -1,0 +1,44 @@
+import QtQuick 2.0
+
+Item {
+    anchors.fill:parent
+
+    Rectangle {
+    id:rect
+    property var colors: ["white", "lightyellow", "lightslategray", "darkslategray"]
+    property int index: 0
+    anchors.centerIn:parent
+    width: 250
+    height: 250
+    color: colors[index]
+    Image {
+    id:img
+    property var colors: ["darkred", "blue", "black","maroon"]
+    property int index: 1
+    anchors.centerIn:parent
+        sourceSize.width: 240
+        source: "image://qrcode"+colors[index]+"/"+texto.text
+}
+    TextEdit{
+    id:texto
+       anchors.top:rect.bottom
+       anchors.horizontalCenter:rect.horizontalCenter
+        anchors.topMargin: 10
+        text:"https://eddytheco.github.io/"
+       wrapMode: TextEdit.Wrap
+       width:img.width
+       color: "white"
+       focus: true
+    }
+    MouseArea {
+        anchors.fill:parent
+        onClicked: { 
+           rect.index= Math.random()*rect.colors.length
+           img.index= Math.random()*img.colors.length
+            
+         }
+    }
+}
+
+}
+

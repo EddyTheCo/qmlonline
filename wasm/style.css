@@ -1,0 +1,163 @@
+html,body{
+	height:100%;
+	width:100%;
+	float:left;
+	min-height: 100%;
+	color: white;
+	font-family: 'Allerta Stencil';font-size: 2vw;
+	margin: 0;
+
+}
+a{
+	text-decoration: underline;
+	color: hotpink;
+}
+.pair {
+	width:100%;
+	height:90%;
+	float: left;
+	background-color: #10141c;
+	color: white;
+}
+
+.codeArea {
+	width: 100%;
+	height:48%;
+	float: left;
+
+}
+.playArea {
+	width: 100%;
+	height: 48%;
+	float: left;
+}
+#editor {
+	width: 100%;
+	height: 100%;
+	float: left;
+}
+canvas {
+	border: 0px none;
+	background-color: transparent;
+	width:100%;
+	height:100%;
+	display: none;
+	outline: 0px solid transparent;
+	caret-color: transparent;
+	cursor:default
+
+}
+figure
+{
+	width:100%;
+	height:100%;
+}
+img
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+	max-height: 70%;
+}
+center
+{
+	float: left;
+	width: 100%;
+	height: 100%;
+}
+footer
+{
+	float:left;
+	width:100%;
+	height:10%;
+	background-color: #10141c;
+	font-size: 2vw;
+}
+.fcont
+{
+	margin-top: 1%;
+	margin-left: 1%;
+	width:99%;
+	height:99%;
+	display:flex;
+	justify-content: space-between;
+	align-items: stretch;
+	flex-direction: column;
+}
+.fdivsub
+{
+	width:auto;
+	height:auto;
+	display:flex;
+	justify-content: center;
+	align-items: stretch;
+	flex-direction: row;
+}
+.ffdiv
+{
+	width:100%;
+	text-align: center;
+	vertical-align: middle;
+}
+.ffdiv span
+{
+	display: inline-block;
+	vertical-align: middle;
+	line-height: normal;
+}
+.fdiv:nth-child(1) {
+	width:80%;
+}
+.fdiv:nth-child(2) {
+	width:100%;
+}
+
+.ffdiv img
+{
+	width:90%;
+	height:auto;
+}
+@media screen and (min-width: 700px) {
+	.pair
+	{
+		height:80%;
+	}
+
+	.codeArea {
+		width: 40%;
+		height: 100%;
+	}
+	.playArea {
+		width: 60%;
+		height: 100%;
+	}
+	footer
+	{
+		height:20%;
+		font-size: 1vw;
+	}
+	.fcont
+	{
+		margin-top: 1%;
+		margin-left: 1%;
+		flex-direction: row;
+	}
+	.fdiv:nth-child(1) {
+		width:30%;
+	}
+	.fdiv:nth-child(2) {
+		width:40%;
+	}
+	.ffdiv
+	{
+		width:20%;
+	}
+	.fdivsub
+	{
+		width:80%;
+		height:auto;
+		align-items: stretch;
+		flex-direction: row;
+	}
+}
