@@ -1,6 +1,9 @@
 # QmlOnline 
 
-This repo produce a Qt application that allows to run Qml code interactively. The resulting application can access QML types defined in C++ . The purpose of this repo is to show online some  C++/Qt/Qml projects. For doing that the repo contains a wasm folder that produce a [web page](https://eddytheco.github.io/qmlonline/wasm/), integrating a JavaScript code editor  to the compiled Qt application of this repo. The integration is made by compiling the Qt application to Webassembly. 
+This repo produce a Qt application that allows to run Qml code interactively.
+The resulting application can access QML types defined in C++.
+The purpose of this repo is to show online some  C++/Qt/Qml projects.
+For doing that the repo contains a wasm folder that produce a [web page](https://eddytheco.github.io/initQTwasm/?after_body_url=https://raw.githubusercontent.com/EddyTheCo/qmlonline/develop/wasm/afterbody.html&init_scripts=https://raw.githubusercontent.com/EddyTheCo/qmlonline/develop/wasm/AfterInitFunctions.js&github_repo=https://github.com/EddyTheCo/qmlonline), integrating a JavaScript code editor  to the compiled Qt application of this repo. The integration is made by compiling the Qt application to Webassembly. 
 
 
 ## Compile the WASM file and Qt-JavaScript Api
