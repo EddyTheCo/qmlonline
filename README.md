@@ -3,7 +3,7 @@
 This repo produce a Qt application that allows to run Qml code interactively.
 The resulting application can access QML types defined in C++.
 The purpose of this repo is to show online some  C++/Qt/Qml projects.
-For doing that the repo contains a wasm folder that produce a [web page](https://eddytheco.github.io/initQTwasm/?after_body_url=https://raw.githubusercontent.com/EddyTheCo/qmlonline/main/wasm/afterbody.html&init_scripts=https://raw.githubusercontent.com/EddyTheCo/qmlonline/main/wasm/AfterInitFunctions.js&github_repo=https://github.com/EddyTheCo/qmlonline), integrating a JavaScript code editor  to the compiled Qt application of this repo. The integration is made by compiling the Qt application to Webassembly. 
+For doing that the repo contains a wasm folder that produce a [web page](https://eddytheco.github.io/qmlonline), integrating a JavaScript code editor  to the compiled Qt application of this repo. The integration is made by compiling the Qt application to Webassembly. 
 
 
 ## Compile the WASM file and Qt-JavaScript Api
@@ -16,7 +16,7 @@ Create build directory and build from there.
 ```
 mkdir build 
 cd build
-qt-cmake -DCMAKE_C_COMPILER:FILEPATH=emcc -DCMAKE_CXX_COMPILER:FILEPATH=em++  -DCMAKE_BUILD_TYPE=Release ../qmlonline/
+./Qt../wasm_32/bin/qt-cmake -DCMAKE_BUILD_TYPE=Release ../qmlonline/
 cmake --build .
 ```
 
@@ -36,5 +36,5 @@ It is necessary to have installed [Qt for WebAssembly](https://doc.qt.io/qt-6/wa
 ## Acknowledgments
 
 - The general programming idea  was taken from [QML Online](https://qmlonline.kde.org/).
-- The embeddable code editor in JavaScript is supported by [Ace](https://ace.c9.io/) javascript sources.
+- The embeddable code editor in JavaScript is supported by [Ace](https://ace.c9.io/) JavaScript sources.
 
