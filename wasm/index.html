@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en-us">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href='https://fonts.googleapis.com/css?family=Allerta Stencil' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Ubuntu Condensed' rel='stylesheet'>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.15.2/ace.js" integrity="sha512-NSbvq6xPdfFIa2wwSh8vtsPL7AyYAYRAUWRDCqFH34kYIjQ4M7H2POiULf3CH11TRcq3Ww6FZDdLZ8msYhMxjg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.15.2/ext-beautify.min.js" integrity="sha512-uXfi0GwpQZcHIhGOMMHeNYtBSjt7qDXjXHmjShWSp+RWMSmjdy69N7M/pufinvQLv6rSYlpbSXqSnLRzWE952w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.15.2/ext-language_tools.js" integrity="sha512-gfVvVXAY83GdYFUKr82Wvg3/zHoqts3fcEs/M7lcp/0y6F5G9b8ilw20aw8ltXCXOCpQlxkp78Z3iPn2LZ2LGQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.15.2/mode-qml.js" integrity="sha512-IJkZO+TqPG28C1RSSNsHBKs9tYpIYYGfjkPBiRkaH9m2h/0FHx1g4AYAA8xvyW5SiXCe/r1mbVlZNUgkPs0Hxg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.15.2/theme-chaos.js" integrity="sha512-BN2eayUXPBYNBybquX/ZkPQnIGrD5dRdcOpniptyLUodluoNwT9mySdFzJD64y0vrOxWF6paAk3t4j61LXWyAA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	<script type="text/javascript" src="qtloader.js"></script>
+	<script type="text/javascript" src="js/initQTwasm.js"></script>
+	<script type="text/javascript" src="js/scripts.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<title>QML Online</title>
+</head>
+
+<body onload="init()">
+	<div class="pair">
+		<div class="codeArea">
+			<div id="editor" style="margin:0px;">
+			</div>
+		</div>
+		<div class="playArea" id="qtrootDiv">
+		</div>
+	</div>
+	<footer>
+		<div class="fdiv" id="gitrepo" style="text-align:center;">
+			<a style="display: contents; width:30px;" href="https://github.com/EddyTheCo/qmlonline" target="_blank"><img style="width:30px;" id="gitHublogo" src="img/gitHublogo.png"></img></a>
+			Developed by <a href="https://eddytheco.github.io/" target="_blank">Eddy</a>
+		</div>
+	</footer>
+</body>
+
+</html>

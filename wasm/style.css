@@ -1,0 +1,128 @@
+html,body{
+	height:100%;
+	width:100%;
+	float:left;
+	min-height: 100%;
+	color: white;
+	font-family: 'Allerta Stencil';font-size: 2vw;
+	margin: 0;
+	padding:0;
+
+}
+a{
+	text-decoration: underline;
+	color: hotpink;
+}
+.pair {
+	width:100%;
+	height:100%;
+	float: left;
+	background-color: #10141c;
+	color: white;
+}
+#qtspinner
+{
+	position:fixed;
+	width:95%;
+	height:95%;
+	bottom: 0;
+	right: 0; 
+	display:block;
+}
+.codeArea {
+	width: 100%;
+	height:0%;
+	float: left;
+
+}
+.playArea {
+	width: 100%;
+	height: 100%;
+	float: left;
+}
+#editor {
+	width: 98%;
+	height: 100%;
+	float: left;
+	margin:1%;
+	font-family : monospace;
+	font-size: 16px ;
+	direction:ltr;
+	text-align:left;
+	overflow-y:scroll;
+}
+canvas {
+	border: 0px none;
+	background-color: transparent;
+	width:100%;
+	height:100%;
+	display: none;
+	outline: 0px solid transparent;
+	caret-color: transparent;
+	cursor:default
+
+}
+figure
+{
+	width:100%;
+	height:100%;
+}
+img
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+	max-height: 70%;
+}
+center
+{
+	float: left;
+	width: 100%;
+	height: 100%;
+}
+footer
+{
+	float:left;
+	width:100%;
+	height:10%;
+	background-color: #10141c;
+	font-size: 2vw;
+}
+.fcont
+{
+	margin-top: 1%;
+	margin-left: 1%;
+	width:99%;
+	height:99%;
+	display:flex;
+	justify-content: space-between;
+	align-items: stretch;
+	flex-direction: column;
+}
+@media screen and (min-width: 700px) {
+	.pair
+	{
+		height:90%;
+	}
+
+	.codeArea {
+		width: 65%;
+		height: 100%;
+	}
+	.playArea {
+		width: 35%;
+		height: 100%;
+	}
+	footer
+	{
+		height:10%;
+		font-size: 1vw;
+	}
+	.fcont
+	{
+		margin-top: 1%;
+		margin-left: 1%;
+		flex-direction: row;
+	}
+}
