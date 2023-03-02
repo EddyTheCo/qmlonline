@@ -1,3 +1,10 @@
+/*
+*  Shows the use of a custom image provider that produce QR Codes.
+*  The library is found on https://github.com/EddyTheCo/qrCode
+*
+*/
+
+
 import QtQuick 2.0
 
 Item {
