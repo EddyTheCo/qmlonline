@@ -1,8 +1,8 @@
 /*
-* Shows the use of the settings button and shaders of the https://github.com/EddyTheCo/MyDesigns library 
-*
-*
+* Shows the use of the settings button and shaders 
+* from the https://github.com/EddyTheCo/MyDesigns library 
 */
+
 import QtQuick.Controls
 import QtQuick
 import MyDesigns
