@@ -1,12 +1,12 @@
-#ifndef QMLTEXTCODE_H
-#define QMLTEXTCODE_H
+#pragma once
 
 #include <QObject>
-#include <qqml.h>
+#include <QtQml/qqmlregistration.h>
 #ifdef USE_EMSCRIPTEN
 #include <emscripten/bind.h>
 #endif
-class qmlTextCode : public QObject
+
+class QmlTextCode : public QObject
 {
     Q_OBJECT
 
@@ -15,12 +15,12 @@ class qmlTextCode : public QObject
     QML_SINGLETON
 
 public:
-    qmlTextCode(){
+    QmlTextCode(){
         editors.push_back(this);
     };
     QString read() const{return _code;};
     void setCode(const std::string& code);
-    static qmlTextCode* get_editor(const size_t& index);
+    static QmlTextCode* get_editor(const size_t& index);
 
 
 
@@ -28,7 +28,7 @@ signals:
     void codeChanged();
 private:
     QString _code;
-    static std::vector<qmlTextCode*> editors;
+    static std::vector<QmlTextCode*> editors;
 };
 
-#endif // QMLTEXTCODE_H
+
