@@ -1,12 +1,40 @@
+/*
+* Shows the use of the settings button and shaders of the https://github.com/EddyTheCo/MyDesigns library 
+*
+*
+*/
 import QtQuick.Controls
 import QtQuick
 import MyDesigns
- 
+
+
+Item
+{
+    anchors.fill:parent
+    Rectangle
+    {
+        id:popup
+        visible:butt.animate
+        width:(parent.width-2.0*butt.width)*0.9
+        height:parent.width*0.9
+        color:"#0f171e"
+        border.width: 2
+        border.color: "#0f79af"
+        anchors.horizontalCenter:parent.horizontalCenter
+        anchors.verticalCenter:parent.verticalCenter
+        radius:20
+        Label {
+            text: "Content goes here!"
+            anchors.centerIn: parent
+            color:"white"
+        }
+    }
 MySettButton
 {   
+    id:butt
 	rect_:Rectangle{
         radius:10
-        border.color:"white"
+        border.color:"#0f79af"
         border.width:1
         color:"#0d1117"
 	}	
@@ -15,10 +43,14 @@ onClicked: {
           animate=!animate;
           }
   
-          frontcolor:"white"
+          frontcolor:"#0f79af"
   
-          anchors.centerIn:parent;
-          width:parent.width*0.5
-          height:parent.height*0.5
+          anchors.left:parent.left;
+          anchors.verticalCenter:parent.verticalCenter
+          width: 75
+          height:50
 }   
+
+}
+
 
