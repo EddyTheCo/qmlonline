@@ -53,9 +53,6 @@ function init() {
             editor.moveCursorTo(cursorPosition.row, cursorPosition.column);
         }
 
-	rformat = setInterval(() => {
-		format();
-	}, 20000);
 	axios.get(example_url)
 		.then(response => {
 			fill_qmlcode_(response.data);
@@ -71,4 +68,11 @@ function init() {
 			qtLoader.module().qmlTextCode.get_editor(0).setCode(editor.session.getValue());
 		}
 	});
+	resizeSplitX()
 }
+function resizeSplitX(event) {
+	ace.require("ace/ext/language_tools");
+        var editor = ace.edit("editor");
+            editor.resize();
+        }
+

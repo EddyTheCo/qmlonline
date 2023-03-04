@@ -16,7 +16,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.15.2/mode-qml.js" integrity="sha512-IJkZO+TqPG28C1RSSNsHBKs9tYpIYYGfjkPBiRkaH9m2h/0FHx1g4AYAA8xvyW5SiXCe/r1mbVlZNUgkPs0Hxg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.15.2/theme-chaos.js" integrity="sha512-BN2eayUXPBYNBybquX/ZkPQnIGrD5dRdcOpniptyLUodluoNwT9mySdFzJD64y0vrOxWF6paAk3t4j61LXWyAA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+<link rel="stylesheet" href="https://cdn.korzh.com/metroui/v4.5.1/css/metro-all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+<script src="https://cdn.korzh.com/metroui/v4.5.1/js/metro.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script type="text/javascript" src="qtloader.js"></script>
 	<script type="text/javascript" src="js/initQTwasm.js"></script>
 	<script type="text/javascript" src="js/scripts.js"></script>
@@ -25,12 +26,12 @@
 </head>
 
 <body onload="init()">
-	<div class="pair">
-		<div class="codeArea">
+	<div class="pair" data-role="splitter" data-on-resize-split="resizeSplitX" class="h-100" >
+		<div class="codeArea d-flex flex-justify-center flex-align-center">
 			<div id="editor" style="margin:0px;">
 			</div>
 		</div>
-		<div class="playArea" id="qtrootDiv">
+		<div class="playArea d-flex flex-justify-center flex-align-center" id="qtrootDiv">
 		</div>
 	</div>
 	<footer>
