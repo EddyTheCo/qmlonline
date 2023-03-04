@@ -32,7 +32,6 @@ function init() {
 	let qmlcode_ = '';
 
 	function fill_qmlcode_(message) {
-		console.log('fillqml', message);
 		qmlcode_ = message;
 	}
 
@@ -65,6 +64,7 @@ function init() {
 			console.log(error);
 		}).then(() => {
 			editor.session.setValue(qmlcode_);
+			format();
 		});
 	editor.getSession().on('change', () => {
 		if (qtLoader.module()) {
