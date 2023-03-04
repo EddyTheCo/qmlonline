@@ -45,7 +45,18 @@ function init() {
 		enableBasicAutocompletion: true,
 		enableSnippets: true,
 		enableLiveAutocompletion: true,
+		wrap:true,
 	});
+	function format() {
+            let cursorPosition = editor.selection.getCursor();
+            var beautify = ace.require("ace/ext/beautify");
+            beautify.beautify(editor.session);
+            editor.moveCursorTo(cursorPosition.row, cursorPosition.column);
+        }
+
+	rformat = setInterval(() => {
+		format();
+	}, 20000);
 	axios.get(example_url)
 		.then(response => {
 			fill_qmlcode_(response.data);
