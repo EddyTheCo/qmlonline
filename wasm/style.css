@@ -23,11 +23,12 @@ a{
 #qtspinner
 {
 	position:fixed;
-	width:95%;
-	height:95%;
-	bottom: 0;
-	right: 0; 
+	width:50%;
+	height:50%;
+	bottom: 25%;
+	right: 25%; 
 	display:block;
+	z-index: 1000
 }
 #editor {
 	width: 100%;
