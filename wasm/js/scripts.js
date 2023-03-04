@@ -7,6 +7,7 @@ function getQueryParameters(url) {
 	});
 	return parameters;
 }
+
 function init() {
 	qtLoader = initQTwasm('.', 'appqmlonline', '#qtrootDiv', 'img/qtlogo.svg');
 
@@ -28,7 +29,7 @@ function init() {
 	const url = window.location.href;
 	const parameter = getQueryParameters(url);
 	const example = (typeof parameter.example_url === 'undefined' ? 'simple' : parameter.example_url);
-	const example_url = "https://raw.githubusercontent.com/EddyTheCo/qmlonline/main/wasm/examples/"+ example;
+	const example_url = "https://raw.githubusercontent.com/EddyTheCo/qmlonline/main/wasm/examples/" + example;
 	let qmlcode_ = '';
 
 	function fill_qmlcode_(message) {
@@ -44,14 +45,15 @@ function init() {
 		enableBasicAutocompletion: true,
 		enableSnippets: true,
 		enableLiveAutocompletion: true,
-		wrap:true,
+		wrap: true,
 	});
+
 	function format() {
-            let cursorPosition = editor.selection.getCursor();
-            var beautify = ace.require("ace/ext/beautify");
-            beautify.beautify(editor.session);
-            editor.moveCursorTo(cursorPosition.row, cursorPosition.column);
-        }
+		let cursorPosition = editor.selection.getCursor();
+		var beautify = ace.require("ace/ext/beautify");
+		beautify.beautify(editor.session);
+		editor.moveCursorTo(cursorPosition.row, cursorPosition.column);
+	}
 
 	axios.get(example_url)
 		.then(response => {
@@ -70,9 +72,11 @@ function init() {
 	});
 	resizeSplitX()
 }
+
 function resizeSplitX(event) {
 	ace.require("ace/ext/language_tools");
-        var editor = ace.edit("editor");
-            editor.resize();
-        }
-
+	var editor = ace.edit("editor");
+	editor.resize();
+	var canvas = document.getElementById("qtcanvas");;
+	qtLoader.resizeCanvasElement(canvas);
+}
