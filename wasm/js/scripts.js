@@ -47,6 +47,17 @@ function init() {
 		enableLiveAutocompletion: true,
 		wrap: true,
 	});
+	editor.commands.addCommand({
+            name: 'format',
+            bindKey: {
+                win: "Ctrl-I",
+                mac: "Cmd-I"
+            },
+            exec: function () {
+                format();
+            }
+        })
+
 
 	function format() {
 		let cursorPosition = editor.selection.getCursor();
