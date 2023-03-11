@@ -9,7 +9,7 @@ function getQueryParameters(url) {
 }
 
 function init() {
-	qtLoader = initQTwasm('.', 'appqmlonline', '#qtrootDiv', 'img/qtlogo.svg');
+	initQTwasm('.', 'appqmlonline', '#qtrootDiv', 'img/qtlogo.svg');
 
 	checkModuleLoad = setInterval(() => {
 		if (qtLoader.module()) {
@@ -88,6 +88,6 @@ function resizeSplitX(event) {
 	ace.require("ace/ext/language_tools");
 	var editor = ace.edit("editor");
 	editor.resize();
-	var canvas = document.getElementById("qtcanvas");;
+	var canvas = document.getElementById("screen");;
 	qtLoader.resizeCanvasElement(canvas);
 }
