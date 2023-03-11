@@ -22,6 +22,8 @@ qt6_add_executable(appqmlonline
 qt6_add_qml_module(appqmlonline
 	URI qmlonline
 	VERSION 1.0
+	RESOURCE_PREFIX
+         "/esterVtech.com/imports"
         QML_FILES
         "main.qml"
         SOURCES
