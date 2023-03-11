@@ -1,3 +1,10 @@
+/****************************************************************************
+**
+** Copyright (C) 2023 Eduardo Gonzalez Lazo.
+** Contact: https://eddytheco.github.io/
+**
+****************************************************************************/
+
 import QtQuick
 import QtQml
 import qmlonline
@@ -13,9 +20,6 @@ Window {
         }
 
     }
-    Timer {
-            interval: 1000; running: true; repeat: true  //This timer was need it to be able to use a timer inside the  useritem. I do not know the reason.
-        }
     Item {
         id: box
         anchors.fill: parent
