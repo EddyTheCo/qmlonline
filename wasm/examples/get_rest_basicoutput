@@ -9,7 +9,7 @@ Item
     anchors.fill:parent
     Component.onCompleted:
     {
-        Node_Conection.nodeaddr="api.testnet.shimmer.network"
+        Node_Conection.nodeaddr="https://api.testnet.shimmer.network"
         //Node_Conection.jwt=""
         Account.seed="9fe7bb0ec7cae8824ebb8c232338cb880a393b21bb4cbd7f35ab85d06ed84586"
     }
