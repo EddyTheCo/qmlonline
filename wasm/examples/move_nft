@@ -1,0 +1,90 @@
+import QtQuick 2.0
+import nodeConection
+import account
+import outMonitor
+import MyDesigns
+import outConsumer
+import outCreator
+import blockSender
+
+Item
+{
+    anchors.fill:parent
+    Component.onCompleted:
+    {
+        Node_Conection.nodeaddr=""
+        Node_Conection.jwt=""
+        Account.seed="9fe7bb0ec7cae8824ebb8c232338cb880a393b21bb4cbd7f35ab85d06ed84586"
+    }
+
+    MyButton {
+        id:butt
+        anchors.left:parent.left;
+        anchors.verticalCenter:parent.verticalCenter
+        enabled:Node_Conection.state
+        width: 75
+        height:50
+        text:"start"
+        onClicked:
+        {
+            var filter="address="+Account.addr_bech32([0,0,0],Node_Conection.info().protocol.bech32Hrp)+"&hasNativeTokens=false";
+            nftmonitor.getRestNftOuts(filter);
+            textarea.tfield.text+="Address:"+Account.addr_bech32([0,0,0],Node_Conection.info().protocol.bech32Hrp)+"\n";
+        }
+    }
+    MyTextArea
+    {
+        id:textarea
+        width:(parent.width-butt.width)*0.97
+        height:parent.height*0.8
+        anchors.left:butt.right
+        anchors.verticalCenter:parent.verticalCenter
+    }
+
+    OutMonitor
+    {
+        id:nftmonitor
+        onGotNewOuts:function (vec,outs) {
+            outconsumer.consume(vec,Account.path_json([0,0,0]));
+            textarea.tfield.text+="Number of outputs:"+outs.length+"\n";
+            outs.forEach(function(obj) {
+            
+                textarea.tfield.text+="nft address:"+Account.json_bech32(obj.chainAddress,Node_Conection.info().protocol.bech32Hrp)+"\n";
+            });
+        }
+    }
+    OutConsumer {
+        id:outconsumer
+        onFinish:function (data,bundle) {
+            if (data.nft.length) {
+                outcreator.setTyp(OutCreator.NFT_typ);
+                outcreator.fromChain(0,bundle);
+                outcreator.setAmount(data.amount);
+                outcreator.setAddressUnlockCondition(Account.path_json([0,0,0]));
+                blocksender.addOutput(outcreator.getOutput());
+                blocksender.addBundle(bundle);
+                blocksender.send();
+            }
+        }
+    }
+    OutCreator
+    {
+        id:outcreator
+
+    }
+    BlockSender
+    {
+        id:blocksender
+        onNotEnoughFunds: function (amount) {
+            textarea.tfield.text+="Not enough funds! Need at least :"+amount+"\n";
+        }
+    }
+    Connections {
+        target: Node_Conection
+        function onNewBlock(id) {
+            textarea.tfield.text+="new block!:"+id+"\n";
+        }
+
+    }
+}
+
