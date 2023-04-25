@@ -1,0 +1,121 @@
+import QtQuick 2.0
+import nodeConection
+import account
+import outMonitor
+import MyDesigns
+import outConsumer
+import outCreator
+import blockSender
+
+Item
+{
+    anchors.fill:parent
+    Component.onCompleted:
+    {
+        Node_Conection.nodeaddr=""
+        Node_Conection.jwt=""
+        Account.seed="9fe7bb0ec7cae8824ebb8c232338cb880a393b21bb4cbd7f35ab85d06ed84586"
+
+        const spamaddress="rms1prwgvvw472spqusqeufvlmp8xdpyxtrnmvt26jnuk6sxdcq2hk8scku26h7";
+        mindepositOut.setAddressUnlockCondition(Account.bech32_json(spamaddress));
+        const expiration = new Date(2023, 0, 0, 0, 0, 0, 0);
+        mindepositOut.setExpirationUnlockCondition(expiration,Account.path_json([0,0,0]));
+        rest.setAddressUnlockCondition(Account.path_json([0,0,0]));
+    }
+
+    MyButton {
+        id:butt
+        anchors.left:parent.left;
+        anchors.verticalCenter:parent.verticalCenter
+        enabled:Node_Conection.state
+        width: 75
+        height:50
+        text:"start"
+        onClicked:
+        {
+            var filter="address="+Account.addr_bech32([0,0,0],Node_Conection.info().protocol.bech32Hrp)+"&hasNativeTokens=false";
+            var filter2="expirationReturnAddress="+Account.addr_bech32([0,0,0],Node_Conection.info().protocol.bech32Hrp)+"&hasNativeTokens=false";
+
+            restmonitor.getRestBasicOuts(filter);
+            restmonitor.getRestBasicOuts(filter2);
+            textarea.tfield.text+="Address:"+Account.addr_bech32([0,0,0],Node_Conection.info().protocol.bech32Hrp)+"\n";
+
+        }
+    }
+    MyTextArea
+    {
+        id:textarea
+        width:(parent.width-butt.width)*0.97
+        height:parent.height*0.8
+        anchors.left:butt.right
+        anchors.verticalCenter:parent.verticalCenter
+    }
+
+    OutMonitor
+    {
+        id:restmonitor
+        onGotNewOuts:function (vec,outs) {
+            console.log("Number of outputs:"+outs.length);
+            outconsumer.consume(vec,Account.path_json([0,0,0]));
+        }
+    }
+
+    OutConsumer {
+        id:outconsumer
+        onFinish:function (data,bundle) {
+            const restamount=Number(data.amount)-Number(mindepositOut.amount());
+
+            console.log("Available amount:"+data.amount);
+            console.log("Deposit:"+mindepositOut.amount());
+            console.log("Rest:"+restamount);
+
+            if (restamount>=0) {
+                blocksender.addOutput(mindepositOut.getOutput());
+
+                if (restamount>0) {
+                    rest.setAmount(restamount);
+                    rest.init();
+                    blocksender.addOutput(rest.getOutput());
+                }
+
+                blocksender.addBundle(bundle);
+                blocksender.send();
+
+            }
+        }
+    }
+    OutCreator
+    {
+        id:mindepositOut
+
+    }
+    OutCreator
+    {
+        id:rest
+    }
+    BlockSender
+    {
+        id:blocksender
+        onNotEnoughFunds: function (amount) {
+            textarea.tfield.text+="Not enough funds! Need at least :"+amount+"\n";
+        }
+        onSent: function (data) {
+            data.outIds.forEach(function(obj) {
+                restmonitor.subscribe("outputs/"+obj);
+                console.log("subscribing to:"+obj);
+            });
+
+        }
+    }
+    Connections {
+        target: Node_Conection
+        function onNewBlock(id) {
+              textarea.tfield.text+="new block!:"+id+"\n";
+          }
+
+        function onStateChanged() {
+            restmonitor.setMinDeposit(mindepositOut.getOutput());
+        }
+
+    }
+}
