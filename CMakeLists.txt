@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.16)
 include(local_conf.cmake OPTIONAL)
 
 option(USE_QtQrGen "add qrcode image providers" ON)
-option(USE_IOTA "add IOTA object types" ON)
+option(USE_IOTA "add IOTA object types" OFF)
 
 
 project(qmlonline VERSION 0.1 LANGUAGES CXX)
