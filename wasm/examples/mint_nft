@@ -6,7 +6,10 @@ import MyDesigns
 import outConsumer
 import outCreator
 import blockSender
-
+/*
+*   Mint NFTS
+*
+*/
 Item
 {
     anchors.fill:parent
@@ -27,9 +30,10 @@ Item
         text:"start"
         onClicked:
         {
+            monitor.setRestCalls(2);
             var filter="address="+Account.addr_bech32([0,0,0],Node_Conection.info().protocol.bech32Hrp)+"&hasNativeTokens=false";
-            basicmonitor.getRestBasicOuts(filter);
-            textarea.tfield.text+="Address:"+Account.addr_bech32([0,0,0],Node_Conection.info().protocol.bech32Hrp)+"\n";
+            monitor.getRestNftOuts(filter);
+            monitor.getRestBasicOuts(filter);
         }
     }
     MyTextArea
@@ -42,28 +46,55 @@ Item
     }
     OutMonitor
     {
-        id:basicmonitor
-        onGotNewOuts:function (vec,outs) {
+        id:monitor
+        onFinished:function (vec,outs) {
             outconsumer.consume(vec,Account.path_json([0,0,0]));
-            textarea.tfield.text+="Number of outputs:"+outs.length+"\n";
         }
     }
     OutConsumer {
         id:outconsumer
         onFinish:function (data,bundle) {
-
+            console.log("data.amount",data.amount);
             outcreator.setTyp(OutCreator.NFT_typ);
-            outcreator.setAmount(data.amount);
             outcreator.setAddressUnlockCondition(Account.path_json([0,0,0]));
             var imutable_metadata= {
                 "standard": "IRC27",
-                "version":"v1.0",
+                "version":"v2.0",
                 "type":"image/png",
-                "name":"profile picture"
+                "name":"profile picture",
+                "uri":"https://www.example.org1"
             };
             outcreator.setImmutableMetadata(imutable_metadata);
-            outcreator.setTag("from iota qt-web");
+            outcreator.setIssuer(Account.path_json([0,0,0]));
             blocksender.addOutput(outcreator.getOutput());
+            outcreator.reset();
+            outcreator.setTyp(OutCreator.NFT_typ);
+            var imutable_metadata2= {
+                "standard": "IRC27",
+                "version":"v2.0",
+                "type":"image/png",
+                "name":"profile picture",
+                "uri":"https://www.example.org2"
+            };
+            outcreator.setImmutableMetadata(imutable_metadata2);
+            outcreator.setAddressUnlockCondition(Account.path_json([0,0,0]));
+            blocksender.addOutput(outcreator.getOutput());
+
+            outcreator.reset();
+            outcreator.setTyp(OutCreator.NFT_typ);
+            outcreator.setAddressUnlockCondition(Account.path_json([0,0,0]));
+            /*
+            * Without this the previous nfts will be burned
+            *
+            *if (data.nft.length) {
+                for (let i = 0; i < data.nft.length; i++) {
+                    outcreator.fromChain(i,bundle);
+                    outcreator.init();
+                    blocksender.addOutput(outcreator.getOutput());
+                }
+                
+            }*/
+
             blocksender.addBundle(bundle);
             blocksender.send();
         }
@@ -77,14 +108,8 @@ Item
     {
         id:blocksender
         onNotEnoughFunds: function (amount) {
-            textarea.tfield.text+="Not enough funds! Need at least :"+amount+"\n";
+            console.log("not enought ", amount);
         }
     }
-    Connections {
-        target: Node_Conection
-        function onNewBlock(id) {
-            textarea.tfield.text+="new block!:"+id+"\n";
-        }
 
-    }
 }
