@@ -6,11 +6,16 @@
 import QtQuick.Controls
 import QtQuick
 import MyDesigns
-
+import CustomStyle 1.0
 
 Item
 {
     anchors.fill:parent
+    
+    Component.onCompleted:
+    {
+        CustomStyle.midColor1="blu"
+    }
     Rectangle
     {
         id:popup
@@ -36,23 +41,16 @@ Item
     MySettButton
     {
         id:butt
-        rect_:Rectangle {
-            radius:10
-            border.color:"#0f79af"
-            border.width:1
-            color:"#0d1117"
-        }
 
         onClicked: {
             animate=!animate;
         }
-
-        frontcolor:"#0f79af"
-
+        text:"Settings"
         anchors.left:parent.left;
         anchors.verticalCenter:parent.verticalCenter
-        width: 75
-        height:50
+        width: 120
+        height:40
     }
 
 }
+
