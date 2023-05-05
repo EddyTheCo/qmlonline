@@ -3,14 +3,15 @@ import nodeConection
 import account
 import outMonitor
 import MyDesigns
+import QtQuick.Controls
 
 Item
 {
+    id:root
     anchors.fill:parent
     Component.onCompleted:
     {
         Node_Conection.nodeaddr="https://api.testnet.shimmer.network"
-        //Node_Conection.jwt=""
         Account.seed="9fe7bb0ec7cae8824ebb8c232338cb880a393b21bb4cbd7f35ab85d06ed84586"
     }
 
@@ -25,27 +26,29 @@ Item
         onClicked:
         {
             var filter="address="+Account.addr_bech32([0,0,0],Node_Conection.info().protocol.bech32Hrp)+"&hasNativeTokens=false";
-            basicmonitor.getRestBasicOuts(filter);
-	    textarea.tfield.text+="Address:"+Account.addr_bech32([0,0,0],Node_Conection.info().protocol.bech32Hrp)+"\n";
+            monitor.getRestBasicOuts(filter);
+	    dialog.textarea.text+="Address:"+Account.addr_bech32([0,0,0],Node_Conection.info().protocol.bech32Hrp)+"\n";
         }
     }
     MyTextArea
     {
-        id:textarea
+        id:dialog
+        label.visible:false
         width:(parent.width-butt.width)*0.97
-        height:parent.height*0.8
+        height:400
         anchors.left:butt.right
-        anchors.verticalCenter:parent.verticalCenter
+        anchors.verticalCenter:root.verticalCenter
     }
     OutMonitor
     {
-        id:basicmonitor
+        id:monitor
         onGotNewOuts:function (vec,outs) {
             outs.forEach(function(obj) {
-                textarea.tfield.text+=JSON.stringify(obj,null, 2);
+                dialog.textarea.text+=JSON.stringify(obj,null, 2);
             });
         }
     }
 
 
 }
+
