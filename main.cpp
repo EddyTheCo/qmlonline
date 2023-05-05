@@ -21,6 +21,7 @@ int main(int argc, char *argv[])
     engine.addImageProvider(QLatin1String("qrCodemaroon"), new QRImageProvider("maroon",1));
 #endif
     qDebug()<<engine.importPathList();
+    qmlRegisterSingletonType(QUrl(u"qrc:/esterVtech.com/imports/MyDesigns/qml/CustomStyle.qml"_qs), "CustomStyle", 1, 0, "CustomStyle");
 	const QUrl url(u"qrc:/esterVtech.com/imports/qmlonline/main.qml"_qs);
 	QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
 			&app, [url](QObject *obj, const QUrl &objUrl) {
