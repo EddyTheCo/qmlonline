@@ -1,0 +1,37 @@
+name: build-wasm
+run-name: ${{ github.actor }} ${{ github.event_name }} to ${{ github.base_ref }} 
+on:
+  push:
+    tags:
+      - 'v*'
+jobs:
+  build-html:
+    uses: EddyTheCo/Common/.github/workflows/build-wasm.yml@main
+    if: startsWith(github.ref, 'refs/tags/v')
+    permissions:
+      pages: write
+      id-token: write
+    with:
+      qtModules: 'qtwebsockets qtshadertools'
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build_test_package
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+          
+      - uses: actions/checkout@v3
+    
+      - uses: actions/download-artifact@v3
+        with:
+           path: artifacts
+      - name: Display structure of downloaded files
+        run: ls -R
+          
+      - name: Releases 
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ./artifacts/*/*       
