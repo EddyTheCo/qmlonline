@@ -76,19 +76,22 @@ if(USE_IOTA)
 	FetchContent_Declare(
 		outCreator
 		GIT_REPOSITORY https://github.com/EddyTheCo/outCreator.git
-		GIT_TAG main
+		GIT_TAG v0.1.1
+		FIND_PACKAGE_ARGS 0 CONFIG
 		)
 	FetchContent_MakeAvailable(outCreator)
 	FetchContent_Declare(
 		outConsumer
 		GIT_REPOSITORY https://github.com/EddyTheCo/outConsumer.git
-		GIT_TAG main
+		GIT_TAG v0.1.1
+		FIND_PACKAGE_ARGS 0 CONFIG
 		)
 	FetchContent_MakeAvailable(outConsumer)
 	FetchContent_Declare(
 		blockSender
 		GIT_REPOSITORY https://github.com/EddyTheCo/BlockSender.git
-		GIT_TAG main
+		GIT_TAG v0.1.1
+		FIND_PACKAGE_ARGS 0 CONFIG
 		)
 	FetchContent_MakeAvailable(blockSender)
 	FetchContent_Declare(
