@@ -4,15 +4,17 @@ on:
   push:
     tags:
       - 'v*'
+  pull_request:
+    branches: [develop]      
 jobs:
   build-html:
     uses: EddyTheCo/Common/.github/workflows/build-wasm.yml@main
-    if: startsWith(github.ref, 'refs/tags/v')
     permissions:
       pages: write
       id-token: write
     with:
       qtModules: 'qtwebsockets qtshadertools'
+      deploy_page:  startsWith(github.ref, 'refs/tags/v')
   release:
     if: startsWith(github.ref, 'refs/tags/v')
     needs: build_test_package
