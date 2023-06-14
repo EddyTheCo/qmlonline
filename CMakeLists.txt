@@ -30,21 +30,6 @@ qt_standard_project_setup()
 qt6_add_executable(appqmlonline
 	main.cpp
 	)
-qt6_add_qml_module(appqmlonline
-	URI qmlonline
-	VERSION 1.0
-	RESOURCE_PREFIX
-	"/esterVtech.com/imports"
-	QML_FILES
-	"main.qml"
-	SOURCES
-	"qmltextcode.cpp" "qmltextcode.h"
-	IMPORTS ${qmlimport}
-	IMPORT_PATH
-	${qmlimport_path}
-	)
-set(qmlimport MyDesigns)
-set(qmlimport_path "${CMAKE_BINARY_DIR}/_deps/mydesigns-build")
 if(USE_QtQrGen)
 	FetchContent_Declare(
 		qrCode
@@ -64,6 +49,8 @@ FetchContent_Declare(
 	FIND_PACKAGE_ARGS 0 CONFIG
 	)
 FetchContent_MakeAvailable(MyDesigns)
+set(qmlimport MyDesigns)
+set(qmlimport_path "${CMAKE_BINARY_DIR}/_deps/mydesigns-build")
 
 if(USE_IOTA)
 	FetchContent_Declare(
@@ -122,6 +109,19 @@ endif(USE_IOTA)
 target_link_libraries(appqmlonline
 	PRIVATE MyDesigns Qt::Core Qt::Gui Qt::Qml Qt::Quick)
 
+qt6_add_qml_module(appqmlonline
+	URI qmlonline
+	VERSION 1.0
+	RESOURCE_PREFIX
+	"/esterVtech.com/imports"
+	QML_FILES
+	"main.qml"
+	SOURCES
+	"qmltextcode.cpp" "qmltextcode.h"
+	IMPORTS ${qmlimport}
+	IMPORT_PATH
+	${qmlimport_path}
+	)
 if(EMSCRIPTEN)
 	target_compile_definitions(appqmlonline PRIVATE USE_EMSCRIPTEN)
 	add_custom_command(
