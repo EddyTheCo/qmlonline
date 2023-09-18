@@ -1,0 +1,23 @@
+/*
+*  Shows the use of a QRCODE decoder provider that produce QR Codes.
+*  The library is found on https://github.com/EddyTheCo/qrCode
+*
+*/
+
+
+import QtQuick 2.0
+
+Item {
+    anchors.fill:parent
+    QrTextArea
+    {
+        id: butt
+        width: 350
+        height:500
+        visible:true
+        closePolicy: Popup.CloseOnPressOutside
+        anchors.centerIn: parent
+    }
+
+}
+
