@@ -9,11 +9,12 @@ function getQueryParameters(url) {
 }
 
 function init() {
-	initQTwasm('.', 'appqmlonline', '#qtrootDiv', 'img/qtlogo.svg');
+	initQTwasm('.', 'appqmlonline', '#qtrootDiv', 'img/esterlogo.png');
 
 	checkModuleLoad = setInterval(() => {
 		if (qtLoader.module()) {
 			qtLoader.module().qmlTextCode.get_editor(0).setCode(editor.session.getValue());
+			qtQR=qtLoader;
 			clearInterval(checkModuleLoad);
 		}
 
