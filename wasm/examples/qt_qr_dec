@@ -15,7 +15,7 @@ Item {
         width: 350
         height:500
         visible:true
-        closePolicy: Popup.CloseOnPressOutside
+        closePolicy: Popup.NoAutoClose
         anchors.centerIn: parent
     }
 
