@@ -1,0 +1,19 @@
+import QtQuick 2.0
+
+import OMQml
+
+Item
+{
+    anchors.fill:parent
+
+    CurrentWeather
+    {
+        width:250
+        height:250
+        anchors.centerIn:parent
+        latitude:41.902916
+        longitude:12.453389
+        frontColor:"lightgray"
+    }
+
+}

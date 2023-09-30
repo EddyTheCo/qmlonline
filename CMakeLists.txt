@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.24)
 include(local_conf.cmake OPTIONAL)
 
 option(USE_QtQr "add qrcode image providers" ON)
+option(USE_OMClient "add open-meteo element" ON)
 option(USE_IOTA "add IOTA object types [not mantained right now]" OFF)
 
 
@@ -30,6 +31,16 @@ qt_standard_project_setup()
 qt6_add_executable(appqmlonline
     main.cpp
 )
+if(USE_OMClient)
+    FetchContent_Declare(
+        OMQml
+        GIT_REPOSITORY https://github.com/EddyTheCo/OMClient.git
+        GIT_TAG main
+        FIND_PACKAGE_ARGS 0.0 CONFIG
+    )
+FetchContent_MakeAvailable(OMQml)
+target_link_libraries(appqmlonline PRIVATE OMQml)
+endif(USE_OMClient)	
 if(USE_QtQr)
     FetchContent_Declare(
         qrCode
@@ -41,7 +52,6 @@ FetchContent_MakeAvailable(qrCode)
 target_link_libraries(appqmlonline PRIVATE QtQrGen QtQrDec)
 
 target_compile_definitions(appqmlonline PRIVATE USE_QtQr)
-list(APPEND qmlimport QtQrGen QtQrDec)
 endif(USE_QtQr)
 FetchContent_Declare(
     MyDesigns
@@ -50,7 +60,6 @@ FetchContent_Declare(
     FIND_PACKAGE_ARGS 0.2 CONFIG
 )
 FetchContent_MakeAvailable(MyDesigns)
-list(APPEND qmlimport MyDesigns)
 
 if(USE_IOTA)
     FetchContent_Declare(
@@ -97,7 +106,6 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(nodeConection)
 target_link_libraries(appqmlonline
     PRIVATE outMonitor outCreator outConsumer blockSender account nodeConection )
-list(APPEND qmlimport outMonitor outCreator outConsumer blockSender nodeConection account)
 endif(USE_IOTA)
 target_link_libraries(appqmlonline
     PRIVATE MyDesigns Qt::Core Qt::Gui Qt::Qml Qt::Quick)
@@ -111,7 +119,6 @@ qt6_add_qml_module(appqmlonline
     "main.qml"
     SOURCES
     "qmltextcode.cpp" "qmltextcode.h"
-    IMPORTS ${qmlimport}
     IMPORT_PATH ${QML_IMPORT_PATH}
 )
 if(EMSCRIPTEN)
