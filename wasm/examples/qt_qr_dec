@@ -6,7 +6,7 @@
 
 import QtQuick.Controls
 import QtQuick 2.0
-
+import QtQrDec
 Item {
     anchors.fill:parent
     QrTextArea
