@@ -39,6 +39,7 @@ if(USE_OMClient)
         FIND_PACKAGE_ARGS 0.0 CONFIG
     )
 FetchContent_MakeAvailable(OMQml)
+list(APPEND qmlimport OMQml)
 target_link_libraries(appqmlonline PRIVATE OMQml)
 endif(USE_OMClient)	
 if(USE_QtQr)
@@ -52,6 +53,7 @@ FetchContent_MakeAvailable(qrCode)
 target_link_libraries(appqmlonline PRIVATE QtQrGen QtQrDec)
 
 target_compile_definitions(appqmlonline PRIVATE USE_QtQr)
+list(APPEND qmlimport QtQrGen QtQrDec)
 endif(USE_QtQr)
 FetchContent_Declare(
     MyDesigns
@@ -60,7 +62,7 @@ FetchContent_Declare(
     FIND_PACKAGE_ARGS 0.2 CONFIG
 )
 FetchContent_MakeAvailable(MyDesigns)
-
+list(APPEND qmlimport MyDesigns)
 if(USE_IOTA)
     FetchContent_Declare(
         outMonitor
@@ -106,6 +108,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(nodeConection)
 target_link_libraries(appqmlonline
     PRIVATE outMonitor outCreator outConsumer blockSender account nodeConection )
+list(APPEND qmlimport outMonitor outCreator outConsumer blockSender nodeConection account)
 endif(USE_IOTA)
 target_link_libraries(appqmlonline
     PRIVATE MyDesigns Qt::Core Qt::Gui Qt::Qml Qt::Quick)
@@ -119,6 +122,7 @@ qt6_add_qml_module(appqmlonline
     "main.qml"
     SOURCES
     "qmltextcode.cpp" "qmltextcode.h"
+    IMPORTS ${qmlimport}
     IMPORT_PATH ${QML_IMPORT_PATH}
 )
 if(EMSCRIPTEN)
