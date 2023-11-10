@@ -45,7 +45,7 @@ async function init() {
                                 exitData.text !== undefined ? ` ()` : '';
                             showUi(spinner);
                         },
-                        entryFunction: window.appqmlonline_entry,
+                        entryFunction: window.createQtAppInstance,
                         containerElements: [screen],
 
                     }
