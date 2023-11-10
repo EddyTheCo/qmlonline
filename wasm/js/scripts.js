@@ -7,26 +7,55 @@ function getQueryParameters(url) {
 	});
 	return parameters;
 }
+let qtModule = undefined;
+async function init() {
 
-function init() {
-	initQTwasm('.', 'appqmlonline', '#qtrootDiv', 'img/esterlogo.png');
+	const rootDiv = document.querySelector('#qtrootDiv');
 
-	checkModuleLoad = setInterval(() => {
-		if (qtLoader.module()) {
-			qtLoader.module().qmlTextCode.get_editor(0).setCode(editor.session.getValue());
-			qtQR=qtLoader;
-			clearInterval(checkModuleLoad);
-		}
+	rootDiv.innerHTML += '<figure  id="qtspinner"> <center > <img id="logo" crossorigin="anonymous" src="img/esterlogo.png" ></img> <div id="qtstatus"></div> </center> </figure> <div class="qtscreen" id="screen" ></div>';
 
-		if (typeof counter === 'undefined') {
-			counter = 0;
-		}
+	const spinner = rootDiv.querySelector('#qtspinner');
+	const screen = rootDiv.querySelector('#screen');
+	const status = rootDiv.querySelector('#qtstatus');
 
-		counter++;
-		if (counter > 60) {
-			clearInterval(checkModuleLoad);
-		}
-	}, 1000);
+
+            const showUi = (ui) => {
+                [spinner, screen].forEach(element => element.style.display = 'none');
+                if (screen === ui)
+                    screen.style.position = 'default';
+                ui.style.display = 'block';
+            }
+
+	try {
+                showUi(spinner);
+                status.innerHTML = 'Loading...';
+
+                qtModule = await qtLoad({
+                    qt: {
+                        onLoaded: () => 
+			    {
+				    showUi(screen);
+			    },
+                        onExit: exitData =>
+                        {
+                            status.innerHTML = 'Application exit';
+                            status.innerHTML +=
+                                exitData.code !== undefined ? ` with code ` : '';
+                            status.innerHTML +=
+                                exitData.text !== undefined ? ` ()` : '';
+                            showUi(spinner);
+                        },
+                        entryFunction: window.appqmlonline_entry,
+                        containerElements: [screen],
+
+                    }
+                });
+            } catch (e) {
+                console.error(e);
+                console.error(e.stack);
+            }
+
+
 	const url = window.location.href;
 	const parameter = getQueryParameters(url);
 	const example = (typeof parameter.example_url === 'undefined' ? 'simple' : parameter.example_url);
@@ -77,12 +106,12 @@ function init() {
 			editor.session.setValue(qmlcode_);
 			format();
 		});
+	qtQR=qtModule;
+	resizeSplitX();
+	qtModule.qmlTextCode.get_editor(0).setCode(editor.session.getValue());
 	editor.getSession().on('change', () => {
-		if (qtLoader.module()) {
-			qtLoader.module().qmlTextCode.get_editor(0).setCode(editor.session.getValue());
-		}
-	});
-	resizeSplitX()
+	qtModule.qmlTextCode.get_editor(0).setCode(editor.session.getValue());
+						});
 }
 
 function resizeSplitX(event) {
@@ -90,5 +119,5 @@ function resizeSplitX(event) {
 	var editor = ace.edit("editor");
 	editor.resize();
 	var canvas = document.getElementById("screen");;
-	qtLoader.resizeCanvasElement(canvas);
+	qtModule.qtResizeContainerElement(canvas);
 }

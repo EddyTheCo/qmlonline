@@ -1,5 +1,5 @@
 /*
-*  Shows the use of a QRCODE decoder provider that produce QR Codes.
+*  Shows the use of a QRCODE decoder.
 *  The library is found on https://github.com/EddyTheCo/qrCode
 *
 */
@@ -9,14 +9,13 @@ import QtQuick 2.0
 import QtQrDec
 Item {
     anchors.fill:parent
-    QrTextArea
+    QrTextCamPop
     {
-        id: butt
-        width: 350
-        height:500
-        visible:true
         closePolicy: Popup.NoAutoClose
-        anchors.centerIn: parent
+        width: 300
+        height:500
+        anchors.centerIn: Overlay.overlay
+        visible:true
     }
 
 }

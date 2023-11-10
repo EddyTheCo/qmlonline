@@ -1,5 +1,10 @@
-import QtQuick 2.0
+/*
+*  Shows the use of a custom QML type that shows the wheatear conditions ant time..
+*  The library is found at https://github.com/EddyTheCo/OMClient
+*
+*/
 
+import QtQuick 2.0
 import OMQml
 
 Item
@@ -8,8 +13,7 @@ Item
 
     CurrentWeather
     {
-        width:250
-        height:250
+	anchors.fill:parent
         anchors.centerIn:parent
         latitude:41.902916
         longitude:12.453389
