@@ -6,7 +6,6 @@ option(USE_QtQr "add qrcode image providers" ON)
 option(USE_OMClient "add open-meteo element" ON)
 option(USE_IOTA "add IOTA object types [not mantained right now]" OFF)
 
-
 include(FetchContent)
 FetchContent_Declare(
 	ccommon
@@ -25,7 +24,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-find_package(Qt6 REQUIRED COMPONENTS Core Gui Quick Qml QuickControls2 )
+find_package(Qt6 REQUIRED COMPONENTS Core Gui Quick Qml  )
 qt_standard_project_setup()
 
 qt6_add_executable(appqmlonline
@@ -41,6 +40,7 @@ if(USE_OMClient)
 	FetchContent_MakeAvailable(OMQml)
 	target_link_libraries(appqmlonline PRIVATE OMQml
 		$<$<STREQUAL:$<TARGET_PROPERTY:OMQml,TYPE>,STATIC_LIBRARY>:OMQmlplugin>)
+	list(APPEND qmlimport OMQml)
 endif(USE_OMClient)
 if(USE_QtQr)
 	FetchContent_Declare(
@@ -55,6 +55,7 @@ if(USE_QtQr)
 		$<$<STREQUAL:$<TARGET_PROPERTY:QtQrDec,TYPE>,STATIC_LIBRARY>:QtQrDecplugin>
 		)
 	target_compile_definitions(appqmlonline PRIVATE USE_QtQr)
+	list(APPEND qmlimport QtQrGen QtQrDec)
 endif(USE_QtQr)
 FetchContent_Declare(
 	MyDesigns
@@ -110,9 +111,6 @@ if(USE_IOTA)
 		PRIVATE outMonitor outCreator outConsumer blockSender account nodeConection )
 	list(APPEND qmlimport outMonitor outCreator outConsumer blockSender nodeConection account)
 endif(USE_IOTA)
-target_link_libraries(appqmlonline PRIVATE MyDesigns Qt6::Core Qt6::Gui Qt6::Qml Qt6::Quick Qt6::QuickControls2
-	$<$<STREQUAL:$<TARGET_PROPERTY:MyDesigns,TYPE>,STATIC_LIBRARY>:MyDesignsplugin>
-	)
 
 qt6_add_qml_module(appqmlonline
 	URI qmlonline
@@ -124,6 +122,10 @@ qt6_add_qml_module(appqmlonline
 	SOURCES
 	"qmltextcode.cpp" "qmltextcode.h"
 	IMPORT_PATH ${CMAKE_BINARY_DIR}
+	IMPORTS ${qmlimport} MyDesigns
+	)
+target_link_libraries(appqmlonline PRIVATE MyDesigns Qt6::Core Qt6::Gui Qt6::Qml Qt6::Quick
+	$<$<STREQUAL:$<TARGET_PROPERTY:MyDesigns,TYPE>,STATIC_LIBRARY>:MyDesignsplugin>
 	)
 if(EMSCRIPTEN)
 	target_compile_definitions(appqmlonline PRIVATE USE_EMSCRIPTEN)
