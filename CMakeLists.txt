@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.24)
 
-include((${CMAKE_CURRENT_BINARY_DIR}/local_conf.cmake OPTIONAL)
+include(${CMAKE_CURRENT_BINARY_DIR}/local_conf.cmake OPTIONAL)
 
 option(USE_QtQr "add qrcode image providers" ON)
 option(USE_OMClient "add open-meteo element" ON)
@@ -35,7 +35,7 @@ if(USE_OMClient)
 	FetchContent_Declare(
 		OMQml
 		GIT_REPOSITORY https://github.com/EddyTheCo/OMClient.git
-		GIT_TAG 0.1.2
+		GIT_TAG v0.1.2
 		FIND_PACKAGE_ARGS 0.1 CONFIG
 		)
 	FetchContent_MakeAvailable(OMQml)
