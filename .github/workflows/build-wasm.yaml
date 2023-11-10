@@ -8,7 +8,7 @@ on:
     branches: [develop]      
   pull_request_target:
     types: [closed]
-    branches: [main,develop]
+    branches: [main, develop]
 jobs:
   build-html:
     uses: EddyTheCo/Common/.github/workflows/build-wasm.yml@develop
