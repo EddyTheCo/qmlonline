@@ -8,7 +8,6 @@ function getQueryParameters(url) {
 	return parameters;
 }
 let qtModule = undefined;
-let qtQR = undefined;
 async function init() {
 
 	const rootDiv = document.querySelector('#qtrootDiv');
