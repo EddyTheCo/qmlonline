@@ -8,7 +8,6 @@ function getQueryParameters(url) {
 	return parameters;
 }
 let qtModule = undefined;
-let qtQR = undefined;
 async function init() {
 
 	const rootDiv = document.querySelector('#qtrootDiv');
@@ -107,7 +106,6 @@ async function init() {
 			editor.session.setValue(qmlcode_);
 			format();
 		});
-	qtQR=qtModule;
 	resizeSplitX();
 	qtModule.qmlTextCode.get_editor(0).setCode(editor.session.getValue());
 	editor.getSession().on('change', () => {
