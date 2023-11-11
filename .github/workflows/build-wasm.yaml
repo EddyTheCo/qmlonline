@@ -11,7 +11,7 @@ on:
     branches: [main]
 jobs:
   build-html:
-    uses: EddyTheCo/Common/.github/workflows/build-wasm.yml@develop
+    uses: EddyTheCo/Common/.github/workflows/build-wasm.yml@v0.0.1
     permissions:
       pages: write
       id-token: write
