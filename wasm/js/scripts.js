@@ -107,7 +107,6 @@ async function init() {
 			editor.session.setValue(qmlcode_);
 			format();
 		});
-	qtQR=qtModule;
 	resizeSplitX();
 	qtModule.qmlTextCode.get_editor(0).setCode(editor.session.getValue());
 	editor.getSession().on('change', () => {
