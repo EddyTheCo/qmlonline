@@ -19,7 +19,7 @@ jobs:
       qtModules: 'qtwebsockets qtshadertools qtmultimedia'
       qtVersion: '6.6.0'
       emsdkVersion: '3.1.37'
-      deploy_dev: ${{ (startsWith(github.base_ref, 'main'))&&(startsWith(github.head_ref, 'develop')) }}
+      deploy_dev: ${{ (github.event.pull_request.merged == false)&&(startsWith(github.base_ref, 'main'))&&(startsWith(github.head_ref, 'develop')) }}
   deploy_wasm:
     needs: build-html
     if: ${{ (startsWith(github.base_ref, 'main'))&&(startsWith(github.head_ref, 'develop')) }}
