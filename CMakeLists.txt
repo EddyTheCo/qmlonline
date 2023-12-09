@@ -47,7 +47,7 @@ if(USE_QtQr)
     FetchContent_Declare(
         qrCode
         GIT_REPOSITORY https://github.com/EddyTheCo/qrCode.git
-        GIT_TAG v1.0.0
+        GIT_TAG v1.0.1
         FIND_PACKAGE_ARGS 1.0 CONFIG
     )
 FetchContent_MakeAvailable(qrCode)
