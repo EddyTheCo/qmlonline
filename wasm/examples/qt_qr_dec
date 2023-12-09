@@ -1,22 +1,33 @@
 /*
-*  Shows the use of a QRCODE decoder.
+*  Shows the use of a QRCODE decoder and QML module.
 *  The library is found on https://github.com/EddyTheCo/qrCode
 *
 */
-
-import QtQuick.Controls
 import QtQuick 2.0
-import QtQrDec
-Item {
+
+import Esterv.Styles.Simple
+import Esterv.CustomControls.QrDec
+import Esterv.CustomControls
+
+Rectangle
+{
+    color:Style.backColor1
     anchors.fill:parent
-    QrTextCamPop
+
+    ThemeSwitch
     {
-        closePolicy: Popup.NoAutoClose
-        width: 300
-        height:500
-        anchors.centerIn: Overlay.overlay
-        visible:true
+        id:themeswitch
+        width:45
+        height:width
+    }
+    QrTextField
+    {
+        anchors.top:themeswitch.bottom
+        anchors.horizontalCenter:parent.horizontalCenter
+        width:300
+        height:60
+        popWidth:Math.max(parent.width*0.5,300)
+        popHeight:Math.max(parent.height*0.5,500)
     }
 
 }
-
