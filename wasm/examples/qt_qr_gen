@@ -3,49 +3,30 @@
 *  The library is found on https://github.com/EddyTheCo/qrCode
 *
 */
-
-
 import QtQuick 2.0
 
-Item {
+import Esterv.Styles.Simple
+import Esterv.CustomControls.QrDec
+import Esterv.CustomControls
+
+Rectangle
+{
+    color:Style.backColor1
     anchors.fill:parent
 
-    Rectangle {
-    id:rect
-    property var colors: ["white", "lightyellow", "lightslategray", "darkslategray"]
-    property int index: 0
-    anchors.centerIn:parent
-    width: 250
-    height: 250
-    color: colors[index]
-    Image {
-    id:img
-    property var colors: ["darkred", "blue", "black","maroon"]
-    property int index: 1
-    anchors.centerIn:parent
-        sourceSize.width: 240
-        source: "image://qrcode"+colors[index]+"/"+texto.text
-}
-    TextEdit{
-    id:texto
-       anchors.top:rect.bottom
-       anchors.horizontalCenter:rect.horizontalCenter
-        anchors.topMargin: 10
+    ThemeSwitch
+    {
+        id:themeswitch
+        width:45
+        height:width
+    }
+    QrText
+    {
+        anchors.horizontalCenter:parent.horizontalCenter
+        anchors.top:themeswitch.bottom
         text:"https://eddytheco.github.io/"
-       wrapMode: TextEdit.Wrap
-       width:img.width
-       color: "white"
-       focus: true
+        width:parent.width*0.5
+        font.pixelSize: 30
     }
-    MouseArea {
-        anchors.fill:parent
-        onClicked: { 
-           rect.index= Math.random()*rect.colors.length
-           img.index= Math.random()*img.colors.length
-            
-         }
-    }
-}
 
 }
-

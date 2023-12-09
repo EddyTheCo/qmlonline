@@ -16,7 +16,7 @@ jobs:
       pages: write
       id-token: write
     with:
-      qtModules: 'qtwebsockets qtshadertools'
+      qtModules: 'qtwebsockets qtshadertools qtmultimedia'
       qtVersion: '6.6.0'
       emsdkVersion: '3.1.37'
       deploy_dev: ${{ (startsWith(github.base_ref, 'main'))&&(startsWith(github.head_ref, 'develop')) }}

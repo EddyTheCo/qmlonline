@@ -1,0 +1,31 @@
+/*
+*  Shows the use of the dateTime pickers QML module.
+*  The library is found on https://github.com/EddyTheCo/DateTimePickers
+*
+*/
+import QtQuick 2.0
+
+import Esterv.Styles.Simple
+import Esterv.CustomControls.QrDec
+import Esterv.CustomControls
+
+Rectangle
+{
+    color:Style.backColor1
+    anchors.fill:parent
+
+    ThemeSwitch
+    {
+        id:themeswitch
+        width:45
+        height:width
+    }
+    ShowDateTimePicker
+    {
+        height:parent.height-themeswitch.height
+        width:parent.width
+        anchors.top: themeswitch.bottom
+        //initDate:new Date('December 10, 1990 04:25:00')
+        //mode:DateTimePicker.Mode.DateOnly
+    }
+}
