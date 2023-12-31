@@ -1,0 +1,41 @@
+/*
+*  Shows the use of the Esterv.Iota.NodeConnection QML module.
+*  The library is found on https://github.com/EddyTheCo/ConectionSettings
+*
+*/
+
+import QtQuick 2.0
+import QtQuick.Layouts
+import Esterv.Styles.Simple
+import Esterv.Iota.NodeConnection
+import Esterv.CustomControls
+
+Rectangle
+{
+    color:Style.backColor1
+    anchors.fill:parent
+
+
+    
+    ColumnLayout
+    {
+        anchors.fill: parent
+
+        ThemeSwitch
+        {
+            id:themeswitch
+        }
+
+        NodeConnectionSettings
+        {
+            
+            Layout.fillWidth: true
+            //defaultnodes:  ListModel {
+             //   ListElement { text: "https://3216aae.online-server.cloud/" }
+            //}
+        }
+
+    }
+
+
+}
