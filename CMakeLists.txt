@@ -5,6 +5,8 @@ include(${CMAKE_CURRENT_BINARY_DIR}/local_conf.cmake OPTIONAL)
 option(USE_QtQr "add qrCode types " ON)
 option(USE_OMClient "add open-meteo types" ON)
 option(USE_DateTimePickers "add datetimepickers types" ON)
+option(USE_Iotaaccount "add iota account  types" ON)
+option(USE_Iotaconnection "add iota connection  types" ON)
 
 
 include(FetchContent)
@@ -43,11 +45,38 @@ target_link_libraries(appqmlonline PRIVATE OMQml
     $<$<STREQUAL:$<TARGET_PROPERTY:OMQml,TYPE>,STATIC_LIBRARY>:OMQmlplugin>)
 list(APPEND qmlimport OMQml)
 endif(USE_OMClient)
+if(USE_Iotaconnection)
+    FetchContent_Declare(
+        IotaNodeConn
+        GIT_REPOSITORY https://github.com/EddyTheCo/ConectionSettings.git
+        GIT_TAG v0.5.0
+        FIND_PACKAGE_ARGS 0.5 CONFIG
+    )
+FetchContent_MakeAvailable(IotaNodeConn)
+target_link_libraries(appqmlonline PRIVATE IotaNodeConn::nodeConnection
+    $<$<STREQUAL:$<TARGET_PROPERTY:IotaNodeConn::nodeConnection,TYPE>,STATIC_LIBRARY>:IotaNodeConn::nodeConnectionplugin>
+)
+list(APPEND qmlimport Esterv.Iota.NodeConnection)
+endif(USE_Iotaconnection)
+if(USE_Iotaaccount)
+    FetchContent_Declare(
+        IotaAccount
+        GIT_REPOSITORY https://github.com/EddyTheCo/account.git
+        GIT_TAG v0.5.0
+        FIND_PACKAGE_ARGS 0.5 CONFIG
+    )
+FetchContent_MakeAvailable(IotaAccount)
+target_link_libraries(appqmlonline PRIVATE IotaAccount::account
+    $<$<STREQUAL:$<TARGET_PROPERTY:IotaAccount::account,TYPE>,STATIC_LIBRARY>:IotaAccount::accountplugin>
+)
+list(APPEND qmlimport Esterv.Iota.Account)
+endif(USE_Iotaaccount)
+
 if(USE_QtQr)
     FetchContent_Declare(
         qrCode
         GIT_REPOSITORY https://github.com/EddyTheCo/qrCode.git
-        GIT_TAG v1.0.1
+        GIT_TAG v1.0.2
         FIND_PACKAGE_ARGS 1.0 CONFIG
     )
 FetchContent_MakeAvailable(qrCode)
@@ -62,7 +91,7 @@ if(USE_DateTimePickers)
     FetchContent_Declare(
             DTPickersQML
             GIT_REPOSITORY https://github.com/EddyTheCo/DateTimePickers.git
-            GIT_TAG v0.1.1
+            GIT_TAG v0.1.2
             FIND_PACKAGE_ARGS 0.1 CONFIG
         )
     FetchContent_MakeAvailable(DTPickersQML)
@@ -76,14 +105,14 @@ endif(USE_DateTimePickers)
 FetchContent_Declare(
     EstervDesigns
     GIT_REPOSITORY https://github.com/EddyTheCo/MyDesigns.git
-    GIT_TAG v1.0.0
-    FIND_PACKAGE_ARGS 1.0 CONFIG
+    GIT_TAG v1.1.0
+    FIND_PACKAGE_ARGS 1.1 CONFIG
 )
 FetchContent_MakeAvailable(EstervDesigns)
 
-target_link_libraries(appqmlonline PRIVATE EstervDesigns::SimpleStyle EstervDesigns::customControls EstervDesigns::FlatControl
+target_link_libraries(appqmlonline PRIVATE EstervDesigns::SimpleStyle EstervDesigns::CustomControls EstervDesigns::FlatControl
     $<$<STREQUAL:$<TARGET_PROPERTY:EstervDesigns::SimpleStyle,TYPE>,STATIC_LIBRARY>:EstervDesigns::SimpleStyleplugin>
-    $<$<STREQUAL:$<TARGET_PROPERTY:EstervDesigns::customControls,TYPE>,STATIC_LIBRARY>:EstervDesigns::customControlsplugin>
+    $<$<STREQUAL:$<TARGET_PROPERTY:EstervDesigns::CustomControls,TYPE>,STATIC_LIBRARY>:EstervDesigns::CustomControlsplugin>
     $<$<STREQUAL:$<TARGET_PROPERTY:EstervDesigns::FlatControl,TYPE>,STATIC_LIBRARY>:EstervDesigns::FlatControlplugin>
 )
 list(APPEND qmlimport "Esterv.Styles.Simple" "Esterv.CustomControls" "Esterv.Controls.Flat")
