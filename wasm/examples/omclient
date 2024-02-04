@@ -5,7 +5,7 @@
 */
 
 import QtQuick 2.0
-import OMQml
+import Esterv.CustomControls.OpenMeteo
 
 Item
 {
@@ -13,11 +13,11 @@ Item
 
     CurrentWeather
     {
-	anchors.fill:parent
+        anchors.fill:parent
         anchors.centerIn:parent
         latitude:41.902916
         longitude:12.453389
-        frontColor:"lightgray"
+        color:"lightgray"
     }
 
 }
