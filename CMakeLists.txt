@@ -7,6 +7,7 @@ option(USE_OMClient "add open-meteo types" ON)
 option(USE_DateTimePickers "add datetimepickers types" ON)
 option(USE_Iotaaccount "add iota account  types" ON)
 option(USE_Iotaconnection "add iota connection  types" ON)
+option(USE_QVault "add QVault  types" ON)
 
 
 include(FetchContent)
@@ -35,15 +36,15 @@ qt6_add_executable(appqmlonline
 )
 if(USE_OMClient)
     FetchContent_Declare(
-        OMQml
+        openMeteo
         GIT_REPOSITORY https://github.com/EddyTheCo/OMClient.git
-        GIT_TAG v0.1.2
-        FIND_PACKAGE_ARGS 0.1 CONFIG
+        GIT_TAG v0.2.0
+        FIND_PACKAGE_ARGS 0.2 CONFIG
     )
-FetchContent_MakeAvailable(OMQml)
-target_link_libraries(appqmlonline PRIVATE OMQml
-    $<$<STREQUAL:$<TARGET_PROPERTY:OMQml,TYPE>,STATIC_LIBRARY>:OMQmlplugin>)
-list(APPEND qmlimport OMQml)
+FetchContent_MakeAvailable(openMeteo)
+target_link_libraries(appqmlonline PRIVATE openMeteo::OMClient
+    $<$<STREQUAL:$<TARGET_PROPERTY:openMeteo::OMClient,TYPE>,STATIC_LIBRARY>:openMeteo::OMClientplugin>)
+list(APPEND qmlimport Esterv.CustomControls.OpenMeteo)
 endif(USE_OMClient)
 if(USE_Iotaconnection)
     FetchContent_Declare(
@@ -69,7 +70,7 @@ FetchContent_MakeAvailable(IotaAccount)
 target_link_libraries(appqmlonline PRIVATE IotaAccount::account
     $<$<STREQUAL:$<TARGET_PROPERTY:IotaAccount::account,TYPE>,STATIC_LIBRARY>:IotaAccount::accountplugin>
 )
-list(APPEND qmlimport Esterv.Iota.Account)
+list(APPEND qmlimport "Esterv.Iota.Account")
 endif(USE_Iotaaccount)
 
 if(USE_QtQr)
@@ -91,7 +92,7 @@ if(USE_DateTimePickers)
     FetchContent_Declare(
             DTPickersQML
             GIT_REPOSITORY https://github.com/EddyTheCo/DateTimePickers.git
-            GIT_TAG v0.1.2
+            GIT_TAG v0.1.3
             FIND_PACKAGE_ARGS 0.1 CONFIG
         )
     FetchContent_MakeAvailable(DTPickersQML)
@@ -101,6 +102,20 @@ target_link_libraries(appqmlonline PRIVATE DTPickersQML::DTPickers
 target_compile_definitions(appqmlonline PRIVATE USE_QtQr)
 list(APPEND qmlimport "Esterv.CustomControls.DateTimePickers")
 endif(USE_DateTimePickers)
+
+if(USE_QVault)
+    FetchContent_Declare(
+            QtVault
+            GIT_REPOSITORY https://github.com/EddyTheCo/QVault.git
+            GIT_TAG v0.1.0
+            FIND_PACKAGE_ARGS 0.1 CONFIG
+        )
+    FetchContent_MakeAvailable(QtVault)
+target_link_libraries(appqmlonline PRIVATE QtVault::vault
+    $<$<STREQUAL:$<TARGET_PROPERTY:QtVault::vault,TYPE>,STATIC_LIBRARY>:QtVault::vaultplugin>
+)
+list(APPEND qmlimport "Esterv.Utils.Vault")
+endif(USE_QVault)
 
 FetchContent_Declare(
     EstervDesigns
