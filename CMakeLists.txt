@@ -34,6 +34,19 @@ qt_standard_project_setup()
 qt6_add_executable(appqmlonline
     main.cpp
 )
+if(USE_QVault)
+    FetchContent_Declare(
+            QtVault
+            GIT_REPOSITORY https://github.com/EddyTheCo/QVault.git
+            GIT_TAG v0.1.1
+            FIND_PACKAGE_ARGS 0.1 CONFIG
+        )
+    FetchContent_MakeAvailable(QtVault)
+target_link_libraries(appqmlonline PRIVATE QtVault::vault
+    $<$<STREQUAL:$<TARGET_PROPERTY:QtVault::vault,TYPE>,STATIC_LIBRARY>:QtVault::vaultplugin>
+)
+list(APPEND qmlimport "Esterv.Utils.Vault")
+endif(USE_QVault)
 if(USE_OMClient)
     FetchContent_Declare(
         openMeteo
@@ -63,8 +76,8 @@ if(USE_Iotaaccount)
     FetchContent_Declare(
         IotaAccount
         GIT_REPOSITORY https://github.com/EddyTheCo/account.git
-        GIT_TAG v0.5.0
-        FIND_PACKAGE_ARGS 0.5 CONFIG
+        GIT_TAG v0.6.0
+        FIND_PACKAGE_ARGS 0.6 CONFIG
     )
 FetchContent_MakeAvailable(IotaAccount)
 target_link_libraries(appqmlonline PRIVATE IotaAccount::account
@@ -103,19 +116,6 @@ target_compile_definitions(appqmlonline PRIVATE USE_QtQr)
 list(APPEND qmlimport "Esterv.CustomControls.DateTimePickers")
 endif(USE_DateTimePickers)
 
-if(USE_QVault)
-    FetchContent_Declare(
-            QtVault
-            GIT_REPOSITORY https://github.com/EddyTheCo/QVault.git
-            GIT_TAG v0.1.0
-            FIND_PACKAGE_ARGS 0.1 CONFIG
-        )
-    FetchContent_MakeAvailable(QtVault)
-target_link_libraries(appqmlonline PRIVATE QtVault::vault
-    $<$<STREQUAL:$<TARGET_PROPERTY:QtVault::vault,TYPE>,STATIC_LIBRARY>:QtVault::vaultplugin>
-)
-list(APPEND qmlimport "Esterv.Utils.Vault")
-endif(USE_QVault)
 
 FetchContent_Declare(
     EstervDesigns
