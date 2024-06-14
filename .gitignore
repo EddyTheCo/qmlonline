@@ -1,6 +1,10 @@
 .git/
+build*
+tags
 doc/html/
 doc/*.tag
 *.swp
 *.autosave
 *.wasm
+wasm/appqmlonline.js
+wasm/qtloader.js
