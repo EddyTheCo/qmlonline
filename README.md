@@ -17,7 +17,7 @@ Create build directory and build from there.
 ```
 mkdir build 
 cd build
-./Qt../wasm_../bin/qt-cmake -DCMAKE_BUILD_TYPE=Release ../qmlonline/
+Qt../wasm_../bin/qt-cmake -DCMAKE_BUILD_TYPE=Release ../qmlonline/
 cmake --build .
 ```
 
