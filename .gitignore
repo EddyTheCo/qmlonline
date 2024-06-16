@@ -8,3 +8,4 @@ doc/*.tag
 *.wasm
 wasm/appqmlonline.js
 wasm/qtloader.js
+CMakeUserPresets.json
