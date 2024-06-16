@@ -17,8 +17,6 @@ Rectangle
     ThemeSwitch
     {
         id:themeswitch
-        width:45
-        height:width
     }
     ShowDateTimePicker
     {

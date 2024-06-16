@@ -1,0 +1,52 @@
+name: codeFormat
+run-name: Format code and do PR
+on:
+  pull_request_target:
+    types: [closed]
+    branches: [develop]
+jobs:
+  checkout-format-pr:
+    runs-on: ubuntu-latest
+    if: ${{ (github.event.pull_request.merged == true) && (startsWith(github.base_ref, 'develop')) }}
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies on ubuntu
+        run: |
+          sudo apt-get update
+          sudo apt-get install clang-format jq
+          pip install cmakelang
+          npm -g install js-beautify
+      
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          aqtversion: '==3.1.*'
+          version: '6.6.0'
+          host: 'linux'
+          target: 'desktop'
+          arch: 'gcc_64'
+
+      - name: Format code
+        run: |
+          rm aqtinstall.log
+          find . -regex '.*\.\(cpp\|hpp\|cu\|cuh\|c\|h\)' -exec clang-format -style=file -i {} \;
+          find . -regex '.*\.\(qml\)' -exec  qmlformat  -i {} \;
+          find . -regex '.*\.\(cmake\)' -exec  cmake-format -i {} \;
+          find . -regex '.*\.\(js\)' -exec  js-beautify -r {} \;
+          find . -regex '.*\.\(json\)' -exec bash -c "jq . {}  > {}.back; mv {}.back {} " \;
+          find . -name  'CMakeLists.txt' -exec  cmake-format -i {} \;
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6.0.4
+        with:
+          commit-message: C/C++/QML formatted code
+          branch: formattedCode
+          author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+          title: Fixed the format of your nice code
+          body: Every time you change the format, I am here to fix your mess.

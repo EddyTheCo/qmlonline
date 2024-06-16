@@ -17,16 +17,16 @@ Rectangle
     ThemeSwitch
     {
         id:themeswitch
-        width:45
-        height:width
     }
     QrText
     {
         anchors.horizontalCenter:parent.horizontalCenter
         anchors.top:themeswitch.bottom
-        text:"https://eddytheco.github.io/"
+        anchors.margins:50
+        text:"https://eddytheco.github.io/     "
         width:parent.width*0.5
-        font.pixelSize: 30
+        font.pixelSize: 20
     }
 
 }
+
