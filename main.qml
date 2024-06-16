@@ -16,9 +16,8 @@ Window {
     Connections {
         target: QmlTextCode
         function onCodeChanged() {
-            box.create(QmlTextCode.code)
+            box.create(QmlTextCode.code);
         }
-
     }
     Item {
         id: box
@@ -26,15 +25,12 @@ Window {
         property var userItem: null
 
         function create(textComponent) {
-
-            if(userItem) {
-                userItem.destroy()
+            if (userItem) {
+                userItem.destroy();
             }
-            userItem = Qt.createQmlObject(textComponent, box, "userItem")
+            userItem = Qt.createQmlObject(textComponent, box, "userItem");
         }
 
         Component.onCompleted: box.create(QmlTextCode.code)
     }
-
-
 }
