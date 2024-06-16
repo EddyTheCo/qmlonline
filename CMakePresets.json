@@ -1,63 +1,63 @@
 {
-	"version": 6,
-	"configurePresets": [
-		{
-			"name": "default-release",
-			"displayName": "Default Config",
-			"description": "Release build type using Ninja generator",
-			"generator": "Ninja",
-			"binaryDir": "${sourceDir}/build/release",
-			"cacheVariables": {
-				"CMAKE_BUILD_TYPE": "Release"
-			}
-		},
-		{
-			"name": "default-develop",
-			"displayName": "Default Config for development",
-			"description": "Debug build type using Ninja generator",
-			"generator": "Ninja",
-			"binaryDir": "${sourceDir}/build/debug",
-			"cacheVariables": {
-				"CMAKE_BUILD_TYPE": "Debug"
-			}
-		}
-	],
-	"buildPresets": [
-		{
-			"name": "default-release",
-			"configurePreset": "default-release"
-		},
-		{
-			"name": "default-develop",
-			"configurePreset": "default-develop"
-		}
-	],
-	"workflowPresets": [
-		{
-			"name": "release",
-			"steps": [
-				{
-					"type": "configure",
-					"name": "default-release"
-				},
-				{
-					"type": "build",
-					"name": "default-release"
-				}
-			]
-		},
-		{
-			"name": "develop",
-			"steps": [
-				{
-					"type": "configure",
-					"name": "default-develop"
-				},
-				{
-					"type": "build",
-					"name": "default-develop"
-				}
-			]
-		}
-	]
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "default-release",
+      "displayName": "Default Config",
+      "description": "Release build type using Ninja generator",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "default-develop",
+      "displayName": "Default Config for development",
+      "description": "Debug build type using Ninja generator",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "default-release",
+      "configurePreset": "default-release"
+    },
+    {
+      "name": "default-develop",
+      "configurePreset": "default-develop"
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "release",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "default-release"
+        },
+        {
+          "type": "build",
+          "name": "default-release"
+        }
+      ]
+    },
+    {
+      "name": "develop",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "default-develop"
+        },
+        {
+          "type": "build",
+          "name": "default-develop"
+        }
+      ]
+    }
+  ]
 }

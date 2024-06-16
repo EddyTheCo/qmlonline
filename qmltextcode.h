@@ -14,21 +14,22 @@ class QmlTextCode : public QObject
     QML_ELEMENT
     QML_SINGLETON
 
-public:
-    QmlTextCode(){
+  public:
+    QmlTextCode()
+    {
         editors.push_back(this);
     };
-    QString read() const{return _code;};
-    void setCode(const std::string& code);
-    static QmlTextCode* get_editor(const size_t& index);
+    QString read() const
+    {
+        return _code;
+    };
+    void setCode(const std::string &code);
+    static QmlTextCode *get_editor(const size_t &index);
 
-
-
-signals:
+  signals:
     void codeChanged();
-private:
+
+  private:
     QString _code;
-    static std::vector<QmlTextCode*> editors;
+    static std::vector<QmlTextCode *> editors;
 };
-
-
