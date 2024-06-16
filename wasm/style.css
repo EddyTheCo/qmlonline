@@ -4,7 +4,9 @@ html,body{
 	float:left;
 	min-height: 100%;
 	color: white;
-	font-family: 'Allerta Stencil';font-size: 2vw;
+	background-color: #10141c;
+	font-family: 'Titillium Web';
+	font-size: 2vw;
 	margin: 0;
 	padding:0;
 
@@ -15,10 +17,14 @@ a{
 }
 .pair {
 	width:100%;
-	height:95%;
+	height:100%;
 	float: left;
 	background-color: #10141c;
 	color: white;
+}
+#codeArea {
+	padding:1%;
+	visibility: collapse;
 }
 #qtspinner
 {
@@ -26,7 +32,7 @@ a{
 	width:50%;
 	height:50%;
 	bottom: 25%;
-	right: 25%; 
+	right: 25%;
 	display:block;
 	z-index: 1000
 }
@@ -40,7 +46,7 @@ a{
 	text-align:left;
 	overflow-y:scroll;
 }
-#screen { width: 100%; height: 100%; }
+.qtscreen { width: 100%; height: 100%; }
 figure
 {
 	width:100%;
@@ -62,11 +68,9 @@ center
 }
 footer
 {
-	float:left;
-	width:100%;
-	height:5%;
 	background-color: #10141c;
 	font-size: 2.0vw;
+	display: none;
 }
 .fcont
 {
@@ -79,33 +83,41 @@ footer
 	align-items: stretch;
 	flex-direction: column;
 }
-.splitter { 
-    display: flex;
+.splitter {
+	display: flex;
 }
 .splitter > .gutter {
-    background-color: #10141c;
-    border: 0px;
+	background-color: #10141c;
+	border: 0px;
+	visibility: hidden;
 }
 
 .splitter > .gutter::before {
-    background-color: #0f79af;
+	background-color: #0f79af;
 }
 
 @media screen and (min-width: 700px) {
-	.pair
-	{
-		height:90%;
+	#codeArea {
+		width: 70%;
+		height: 100%;
+		visibility: visible;
 	}
-
 	footer
 	{
 		height:10%;
+		width:100%;
 		font-size: 1vw;
+		position: absolute;
+		top: 100%;
+		display: inherit;
 	}
 	.fcont
 	{
 		margin-top: 1%;
 		margin-left: 1%;
 		flex-direction: row;
+	}
+	.splitter > .gutter {
+		visibility: visible;
 	}
 }
