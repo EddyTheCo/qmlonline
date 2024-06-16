@@ -30,9 +30,13 @@ Rectangle
         {
             
             Layout.fillWidth: true
-            //defaultnodes:  ListModel {
-             //   ListElement { text: "https://3216aae.online-server.cloud/" }
-            //}
+            Layout.maximumWidth:400
+            Layout.alignment:Qt.AlignHCenter
+            defaultnodes:  ListModel {
+                ListElement { text: "https://lithuania.dlt.green/" }
+                ListElement { text: "https://3216aae.online-server.cloud/" }
+                ListElement { text: "https://multiverse.dlt.builders/" }
+            }
         }
 
     }
