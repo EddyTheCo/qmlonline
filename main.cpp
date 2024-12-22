@@ -3,9 +3,12 @@
 
 #include <QQuickStyle>
 #ifdef USE_QtQr
-#include "Qrimagedecoder.hpp"
-#include "Qrimageprovider.hpp"
+#include <esterv/utils/qr_image_decoder.hpp>
+#include <esterv/utils/qr_image_provider.hpp>
 #endif
+
+using namespace Esterv::Utils::QrGen;
+using namespace Esterv::Utils::QrDec;
 
 int main(int argc, char *argv[])
 {
