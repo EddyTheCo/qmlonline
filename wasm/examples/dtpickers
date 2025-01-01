@@ -1,6 +1,6 @@
 /*
-*  Shows the use of the dateTime pickers QML module.
-*  The library is found on https://github.com/EddyTheCo/DateTimePickers
+*  Shows the use of the Date and Time pickers QML module.
+*  The library is found on https://github.com/EddyTheCo/Esterv.CustomControls.DateTimePickers
 *
 */
 import QtQuick 2.0
