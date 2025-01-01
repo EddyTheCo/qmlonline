@@ -1,6 +1,6 @@
 /*
 *  Shows the use of a QRCODE decoder and QML module.
-*  The library is found on https://github.com/EddyTheCo/qrCode
+*  The library is found on https://github.com/EddyTheCo/Esterv.Utils.QrCode
 *
 */
 import QtQuick 2.0
