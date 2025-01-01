@@ -5,7 +5,7 @@ include(${CMAKE_CURRENT_BINARY_DIR}/local_conf.cmake OPTIONAL)
 option(USE_QtQr "add qrCode types " ON)
 option(USE_OMClient "add open-meteo types" ON)
 option(USE_DateTimePickers "add datetimepickers types" ON)
-option(USE_Iotaaccount "add iota account  types" ON)
+option(USE_Iotaaccount "add iota account  types" OFF)
 option(USE_Iotaconnection "add iota connection  types" ON)
 option(USE_QVault "add QVault  types" ON)
 
@@ -32,31 +32,31 @@ qt_standard_project_setup()
 qt6_add_executable(appqmlonline main.cpp)
 if(USE_QVault)
   FetchContent_Declare(
-    QtVault
-    GIT_REPOSITORY https://github.com/EddyTheCo/QVault.git
-    GIT_TAG v0.2.1
-    FIND_PACKAGE_ARGS 0.2 CONFIG)
-  FetchContent_MakeAvailable(QtVault)
+    EstervVault
+    GIT_REPOSITORY https://github.com/EddyTheCo/Esterv.Crypto.Vault.git
+    GIT_TAG v1.0.0
+    FIND_PACKAGE_ARGS 1 CONFIG)
+  FetchContent_MakeAvailable(EstervVault)
   target_link_libraries(
     appqmlonline
     PRIVATE
-      QtVault::qvault
-      $<$<STREQUAL:$<TARGET_PROPERTY:QtVault::qvault,TYPE>,STATIC_LIBRARY>:QtVault::qvaultplugin>
+    Esterv::vault
+    $<$<STREQUAL:$<TARGET_PROPERTY:Esterv::vault,TYPE>,STATIC_LIBRARY>:Esterv::vaultplugin>
   )
-  list(APPEND qmlimport "Esterv.Utils.Vault")
+  list(APPEND qmlimport "Esterv.Crypto.Vault")
 endif(USE_QVault)
 if(USE_OMClient)
   FetchContent_Declare(
-    openMeteo
-    GIT_REPOSITORY https://github.com/EddyTheCo/OMClient.git
-    GIT_TAG v0.3.0
-    FIND_PACKAGE_ARGS 0.3 CONFIG)
-  FetchContent_MakeAvailable(openMeteo)
+    EstervOpenMeteo 
+    GIT_REPOSITORY https://github.com/EddyTheCo/Esterv.Utils.OMClient.git
+    GIT_TAG v0.4.0
+    FIND_PACKAGE_ARGS 0.4 CONFIG)
+  FetchContent_MakeAvailable(EstervOpenMeteo)
   target_link_libraries(
     appqmlonline
     PRIVATE
-      openMeteo::OMClient
-      $<$<STREQUAL:$<TARGET_PROPERTY:openMeteo::OMClient,TYPE>,STATIC_LIBRARY>:openMeteo::OMClientplugin>
+    Esterv::OMClient
+    $<$<STREQUAL:$<TARGET_PROPERTY:Esterv::OMClient,TYPE>,STATIC_LIBRARY>:Esterv::OMClientplugin>
   )
   list(APPEND qmlimport Esterv.CustomControls.OpenMeteo)
 endif(USE_OMClient)
