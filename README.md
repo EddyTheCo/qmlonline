@@ -9,17 +9,8 @@ integrating a JavaScript code editor  to the compiled Qt application of this rep
 
 ## Compile the WASM file and Qt-JavaScript Api
 
-Clone the repo
-```
-git clone git@github.com:EddyTheCo/qmlonline.git qmlonline
-```
-Create build directory and build from there.
-```
-mkdir build 
-cd build
-Qt../wasm_../bin/qt-cmake -DCMAKE_BUILD_TYPE=Release ../qmlonline/
-cmake --build .
-```
+The project uses [CMake presets](https://cmake.org/cmake/help/latest/manual/cmake-presets.7.html) as a way to share CMake configurations.
+Refer to [cmake](https://cmake.org/cmake/help/latest/manual/cmake.1.html), [ctest](https://cmake.org/cmake/help/latest/manual/ctest.1.html) and [cpack](https://cmake.org/cmake/help/latest/manual/cpack.1.html) documentation for more information on the use of presets.
 
 If everything went well, the corresponding WASM file and Qt-JavaScript Api should be updated on the qmlonline/wasm source directory. 
 

@@ -5,15 +5,15 @@ include(${CMAKE_CURRENT_BINARY_DIR}/local_conf.cmake OPTIONAL)
 option(USE_QtQr "add qrCode types " ON)
 option(USE_OMClient "add open-meteo types" ON)
 option(USE_DateTimePickers "add datetimepickers types" ON)
-option(USE_Iotaaccount "add iota account  types" ON)
+option(USE_Iotaaccount "add iota account  types" OFF)
 option(USE_Iotaconnection "add iota connection  types" ON)
-option(USE_QVault "add QVault  types" ON)
+option(USE_Vault "add Vault  types" ON)
 
 include(FetchContent)
 FetchContent_Declare(
   ccommon
   GIT_REPOSITORY https://github.com/EddyTheCo/Common.git
-  GIT_TAG v0.4.0)
+  GIT_TAG v0.5.0)
 FetchContent_MakeAvailable(ccommon)
 version_from_git(LOG OFF TIMESTAMP "%Y%m%d%H%M%S")
 project(
@@ -30,33 +30,33 @@ find_package(Qt6 REQUIRED COMPONENTS Core Gui Quick Qml QuickControls2)
 qt_standard_project_setup()
 
 qt6_add_executable(appqmlonline main.cpp)
-if(USE_QVault)
+if(USE_Vault)
   FetchContent_Declare(
-    QtVault
-    GIT_REPOSITORY https://github.com/EddyTheCo/QVault.git
-    GIT_TAG v0.2.1
-    FIND_PACKAGE_ARGS 0.2 CONFIG)
-  FetchContent_MakeAvailable(QtVault)
+    EstervVault
+    GIT_REPOSITORY https://github.com/EddyTheCo/Esterv.Crypto.Vault.git
+    GIT_TAG v1.0.0
+    FIND_PACKAGE_ARGS 1 CONFIG)
+  FetchContent_MakeAvailable(EstervVault)
   target_link_libraries(
     appqmlonline
     PRIVATE
-      QtVault::qvault
-      $<$<STREQUAL:$<TARGET_PROPERTY:QtVault::qvault,TYPE>,STATIC_LIBRARY>:QtVault::qvaultplugin>
+      Esterv::Vault
+      $<$<STREQUAL:$<TARGET_PROPERTY:Esterv::Vault,TYPE>,STATIC_LIBRARY>:Esterv::Vaultplugin>
   )
-  list(APPEND qmlimport "Esterv.Utils.Vault")
-endif(USE_QVault)
+  list(APPEND qmlimport "Esterv.Crypto.Vault")
+endif(USE_Vault)
 if(USE_OMClient)
   FetchContent_Declare(
-    openMeteo
-    GIT_REPOSITORY https://github.com/EddyTheCo/OMClient.git
-    GIT_TAG v0.3.0
-    FIND_PACKAGE_ARGS 0.3 CONFIG)
-  FetchContent_MakeAvailable(openMeteo)
+    EstervOpenMeteo
+    GIT_REPOSITORY https://github.com/EddyTheCo/Esterv.Utils.OMClient.git
+    GIT_TAG v0.4.0
+    FIND_PACKAGE_ARGS 0.4 CONFIG)
+  FetchContent_MakeAvailable(EstervOpenMeteo)
   target_link_libraries(
     appqmlonline
     PRIVATE
-      openMeteo::OMClient
-      $<$<STREQUAL:$<TARGET_PROPERTY:openMeteo::OMClient,TYPE>,STATIC_LIBRARY>:openMeteo::OMClientplugin>
+      Esterv::OMClient
+      $<$<STREQUAL:$<TARGET_PROPERTY:Esterv::OMClient,TYPE>,STATIC_LIBRARY>:Esterv::OMClientplugin>
   )
   list(APPEND qmlimport Esterv.CustomControls.OpenMeteo)
 endif(USE_OMClient)
@@ -93,18 +93,18 @@ endif(USE_Iotaaccount)
 
 if(USE_QtQr)
   FetchContent_Declare(
-    qrCode
-    GIT_REPOSITORY https://github.com/EddyTheCo/qrCode.git
-    GIT_TAG v1.1.0
-    FIND_PACKAGE_ARGS 1.1 CONFIG)
-  FetchContent_MakeAvailable(qrCode)
+    EstervQrCode
+    GIT_REPOSITORY https://github.com/EddyTheCo/Esterv.Utils.QrCode
+    GIT_TAG v2.0.0
+    FIND_PACKAGE_ARGS 2 CONFIG)
+  FetchContent_MakeAvailable(EstervQrCode)
   target_link_libraries(
     appqmlonline
     PRIVATE
-      qrCode::QtQrGen
-      qrCode::QtQrDec
-      $<$<STREQUAL:$<TARGET_PROPERTY:qrCode::QtQrGen,TYPE>,STATIC_LIBRARY>:qrCode::QtQrGenplugin>
-      $<$<STREQUAL:$<TARGET_PROPERTY:qrCode::QtQrDec,TYPE>,STATIC_LIBRARY>:qrCode::QtQrDecplugin>
+      Esterv::QtQrGen
+      Esterv::QtQrDec
+      $<$<STREQUAL:$<TARGET_PROPERTY:Esterv::QtQrGen,TYPE>,STATIC_LIBRARY>:Esterv::QtQrGenplugin>
+      $<$<STREQUAL:$<TARGET_PROPERTY:Esterv::QtQrDec,TYPE>,STATIC_LIBRARY>:Esterv::QtQrDecplugin>
   )
   target_compile_definitions(appqmlonline PRIVATE USE_QtQr)
   list(APPEND qmlimport "Esterv.CustomControls.QrGen"
@@ -112,16 +112,17 @@ if(USE_QtQr)
 endif(USE_QtQr)
 if(USE_DateTimePickers)
   FetchContent_Declare(
-    DTPickersQML
-    GIT_REPOSITORY https://github.com/EddyTheCo/DateTimePickers.git
-    GIT_TAG v0.2.1
-    FIND_PACKAGE_ARGS 0.2 CONFIG)
-  FetchContent_MakeAvailable(DTPickersQML)
+    EstervDTPickers
+    GIT_REPOSITORY
+      https://github.com/EddyTheCo/Esterv.CustomControls.DateTimePickers.git
+    GIT_TAG v1.0.0
+    FIND_PACKAGE_ARGS 1 CONFIG)
+  FetchContent_MakeAvailable(EstervDTPickers)
   target_link_libraries(
     appqmlonline
     PRIVATE
-      DTPickersQML::DTPickers
-      $<$<STREQUAL:$<TARGET_PROPERTY:DTPickersQML::DTPickers,TYPE>,STATIC_LIBRARY>:DTPickersQML::DTPickersplugin>
+      Esterv::DTPickers
+      $<$<STREQUAL:$<TARGET_PROPERTY:Esterv::DTPickers,TYPE>,STATIC_LIBRARY>:Esterv::DTPickersplugin>
   )
   target_compile_definitions(appqmlonline PRIVATE USE_QtQr)
   list(APPEND qmlimport "Esterv.CustomControls.DateTimePickers")
@@ -129,20 +130,20 @@ endif(USE_DateTimePickers)
 
 FetchContent_Declare(
   EstervDesigns
-  GIT_REPOSITORY https://github.com/EddyTheCo/MyDesigns.git
-  GIT_TAG v1.2.1
-  FIND_PACKAGE_ARGS 1.2 CONFIG)
+  GIT_REPOSITORY https://github.com/EddyTheCo/Esterv.Designs.git
+  GIT_TAG v2.0.0
+  FIND_PACKAGE_ARGS 2.0 CONFIG)
 FetchContent_MakeAvailable(EstervDesigns)
 
 target_link_libraries(
   appqmlonline
   PRIVATE
-    EstervDesigns::SimpleStyle
-    EstervDesigns::CustomControls
-    EstervDesigns::FlatControl
-    $<$<STREQUAL:$<TARGET_PROPERTY:EstervDesigns::SimpleStyle,TYPE>,STATIC_LIBRARY>:EstervDesigns::SimpleStyleplugin>
-    $<$<STREQUAL:$<TARGET_PROPERTY:EstervDesigns::CustomControls,TYPE>,STATIC_LIBRARY>:EstervDesigns::CustomControlsplugin>
-    $<$<STREQUAL:$<TARGET_PROPERTY:EstervDesigns::FlatControl,TYPE>,STATIC_LIBRARY>:EstervDesigns::FlatControlplugin>
+    Esterv::SimpleStyle
+    Esterv::CustomControls
+    Esterv::FlatControl
+    $<$<STREQUAL:$<TARGET_PROPERTY:Esterv::SimpleStyle,TYPE>,STATIC_LIBRARY>:Esterv::SimpleStyleplugin>
+    $<$<STREQUAL:$<TARGET_PROPERTY:Esterv::CustomControls,TYPE>,STATIC_LIBRARY>:Esterv::CustomControlsplugin>
+    $<$<STREQUAL:$<TARGET_PROPERTY:Esterv::FlatControl,TYPE>,STATIC_LIBRARY>:Esterv::FlatControlplugin>
 )
 list(APPEND qmlimport "Esterv.Styles.Simple" "Esterv.CustomControls"
      "Esterv.Controls.Flat")
