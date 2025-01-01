@@ -40,14 +40,14 @@ if(USE_Vault)
   target_link_libraries(
     appqmlonline
     PRIVATE
-    Esterv::Vault
-    $<$<STREQUAL:$<TARGET_PROPERTY:Esterv::Vault,TYPE>,STATIC_LIBRARY>:Esterv::Vaultplugin>
+      Esterv::Vault
+      $<$<STREQUAL:$<TARGET_PROPERTY:Esterv::Vault,TYPE>,STATIC_LIBRARY>:Esterv::Vaultplugin>
   )
   list(APPEND qmlimport "Esterv.Crypto.Vault")
 endif(USE_Vault)
 if(USE_OMClient)
   FetchContent_Declare(
-    EstervOpenMeteo 
+    EstervOpenMeteo
     GIT_REPOSITORY https://github.com/EddyTheCo/Esterv.Utils.OMClient.git
     GIT_TAG v0.4.0
     FIND_PACKAGE_ARGS 0.4 CONFIG)
@@ -55,8 +55,8 @@ if(USE_OMClient)
   target_link_libraries(
     appqmlonline
     PRIVATE
-    Esterv::OMClient
-    $<$<STREQUAL:$<TARGET_PROPERTY:Esterv::OMClient,TYPE>,STATIC_LIBRARY>:Esterv::OMClientplugin>
+      Esterv::OMClient
+      $<$<STREQUAL:$<TARGET_PROPERTY:Esterv::OMClient,TYPE>,STATIC_LIBRARY>:Esterv::OMClientplugin>
   )
   list(APPEND qmlimport Esterv.CustomControls.OpenMeteo)
 endif(USE_OMClient)
@@ -101,10 +101,10 @@ if(USE_QtQr)
   target_link_libraries(
     appqmlonline
     PRIVATE
-    Esterv::QtQrGen
-    Esterv::QtQrDec
-    $<$<STREQUAL:$<TARGET_PROPERTY:Esterv::QtQrGen,TYPE>,STATIC_LIBRARY>:Esterv::QtQrGenplugin>
-    $<$<STREQUAL:$<TARGET_PROPERTY:Esterv::QtQrDec,TYPE>,STATIC_LIBRARY>:Esterv::QtQrDecplugin>
+      Esterv::QtQrGen
+      Esterv::QtQrDec
+      $<$<STREQUAL:$<TARGET_PROPERTY:Esterv::QtQrGen,TYPE>,STATIC_LIBRARY>:Esterv::QtQrGenplugin>
+      $<$<STREQUAL:$<TARGET_PROPERTY:Esterv::QtQrDec,TYPE>,STATIC_LIBRARY>:Esterv::QtQrDecplugin>
   )
   target_compile_definitions(appqmlonline PRIVATE USE_QtQr)
   list(APPEND qmlimport "Esterv.CustomControls.QrGen"
@@ -113,15 +113,16 @@ endif(USE_QtQr)
 if(USE_DateTimePickers)
   FetchContent_Declare(
     EstervDTPickers
-    GIT_REPOSITORY https://github.com/EddyTheCo/Esterv.CustomControls.DateTimePickers.git
+    GIT_REPOSITORY
+      https://github.com/EddyTheCo/Esterv.CustomControls.DateTimePickers.git
     GIT_TAG v1.0.0
     FIND_PACKAGE_ARGS 1 CONFIG)
   FetchContent_MakeAvailable(EstervDTPickers)
   target_link_libraries(
     appqmlonline
     PRIVATE
-    Esterv::DTPickers
-    $<$<STREQUAL:$<TARGET_PROPERTY:Esterv::DTPickers,TYPE>,STATIC_LIBRARY>:Esterv::DTPickersplugin>
+      Esterv::DTPickers
+      $<$<STREQUAL:$<TARGET_PROPERTY:Esterv::DTPickers,TYPE>,STATIC_LIBRARY>:Esterv::DTPickersplugin>
   )
   target_compile_definitions(appqmlonline PRIVATE USE_QtQr)
   list(APPEND qmlimport "Esterv.CustomControls.DateTimePickers")
