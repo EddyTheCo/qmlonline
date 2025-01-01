@@ -7,7 +7,7 @@ option(USE_OMClient "add open-meteo types" ON)
 option(USE_DateTimePickers "add datetimepickers types" ON)
 option(USE_Iotaaccount "add iota account  types" OFF)
 option(USE_Iotaconnection "add iota connection  types" ON)
-option(USE_QVault "add QVault  types" ON)
+option(USE_Vault "add Vault  types" ON)
 
 include(FetchContent)
 FetchContent_Declare(
@@ -30,7 +30,7 @@ find_package(Qt6 REQUIRED COMPONENTS Core Gui Quick Qml QuickControls2)
 qt_standard_project_setup()
 
 qt6_add_executable(appqmlonline main.cpp)
-if(USE_QVault)
+if(USE_Vault)
   FetchContent_Declare(
     EstervVault
     GIT_REPOSITORY https://github.com/EddyTheCo/Esterv.Crypto.Vault.git
@@ -40,11 +40,11 @@ if(USE_QVault)
   target_link_libraries(
     appqmlonline
     PRIVATE
-    Esterv::vault
-    $<$<STREQUAL:$<TARGET_PROPERTY:Esterv::vault,TYPE>,STATIC_LIBRARY>:Esterv::vaultplugin>
+    Esterv::Vault
+    $<$<STREQUAL:$<TARGET_PROPERTY:Esterv::Vault,TYPE>,STATIC_LIBRARY>:Esterv::Vaultplugin>
   )
   list(APPEND qmlimport "Esterv.Crypto.Vault")
-endif(USE_QVault)
+endif(USE_Vault)
 if(USE_OMClient)
   FetchContent_Declare(
     EstervOpenMeteo 
