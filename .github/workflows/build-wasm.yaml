@@ -18,7 +18,7 @@ jobs:
   release-deploy:
     if: ${{ ((startsWith(github.base_ref, 'main'))&&(startsWith(github.head_ref, 'develop')))||(startsWith(github.ref, 'refs/tags/v')) }}
     needs: [build-wasm]
-    uses: EddyTheCo/Common/.github/workflows/release.yml@develop
+    uses: EddyTheCo/Common/.github/workflows/release.yml@v0.5.2
     with:
       is_app: true 
       release: ${{ startsWith(github.ref, 'refs/tags/v') }}
