@@ -1,0 +1,15 @@
+name: Auto-Create Develop Branch
+run-name: Recreating develop branch
+
+on:
+  pull_request_target:
+    types: [closed]
+    branches: [main]
+
+jobs:
+  create-develop-branch:
+    uses: EddyTheCo/Common/.github/workflows/recreate-develop.yml@v0.5.2
+    if: ${{ (github.event.pull_request.merged == true) && (startsWith(github.base_ref, 'main')) && (startsWith(github.head_ref, 'develop'))}}
+    permissions:
+      contents: write
+

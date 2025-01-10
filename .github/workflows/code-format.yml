@@ -6,7 +6,7 @@ on:
     branches: [develop]
 jobs:
   checkout-format-pr:
-    uses: EddyTheCo/Common/.github/workflows/code-format.yml@v0.5.0
+    uses: EddyTheCo/Common/.github/workflows/code-format.yml@v0.5.2
     if: ${{ (github.event.pull_request.merged == true) && (startsWith(github.base_ref, 'develop')) }}
     permissions:
       contents: write
