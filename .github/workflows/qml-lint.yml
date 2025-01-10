@@ -7,29 +7,9 @@ on:
     types:
       - completed
 jobs:
-  download-comment:
-    runs-on: ubuntu-latest
+  qmllint-comment:
+    uses: EddyTheCo/Common/.github/workflows/qml-lint.yml@v0.5.2
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     permissions:
       actions: read
       pull-requests: write
-    steps:
-      - name: 'Download artifact'
-        uses: actions/download-artifact@v4
-        with:
-          name: common
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          run-id: ${{ github.event.workflow_run.id }}
-
-      - name: Read pr number
-        id: getprn
-        run: |
-          cat pr_number
-          echo "prn=$(cat pr_number)" >> $GITHUB_OUTPUT
-
-      - name: 'Run reviewer'
-        uses: EddyTheCo/qmllint-action/@v0.1.0
-        with:
-          jsondir:  ${{ github.workspace }}
-          pr_number: ${{ steps.getprn.outputs.prn }}
-
