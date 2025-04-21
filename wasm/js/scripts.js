@@ -31,29 +31,26 @@ async function init() {
         status.innerHTML = 'Loading...';
 
         qtModule = await qtLoad({
-            qt: {
-                onLoaded: () => {
-                    showUi(screen);
-                },
-                onExit: exitData => {
-                    status.innerHTML = 'Application exit';
-                    status.innerHTML +=
-                        exitData.code !== undefined ? ` with code ` : '';
-                    status.innerHTML +=
-                        exitData.text !== undefined ? ` ()` : '';
-                    showUi(spinner);
-                },
-                entryFunction: window.createQtAppInstance,
-                containerElements: [screen],
-
-            }
+                    qt: {
+                        onLoaded: () => showUi(screen),
+                        onExit: exitData =>
+                        {
+                            status.innerHTML = 'Application exit';
+                            status.innerHTML +=
+                                exitData.code !== undefined ? ` with code ${exitData.code}` : '';
+                            status.innerHTML +=
+                                exitData.text !== undefined ? ` (${exitData.text})` : '';
+                            showUi(spinner);
+                        },
+                        entryFunction: window.appqmlonline_entry,
+                        containerElements: [screen],
+                        
+                    }
         });
     } catch (e) {
         console.error(e);
         console.error(e.stack);
     }
-
-
 
     const editor = ace.edit('editor');
     editor.setTheme('ace/theme/chaos');
