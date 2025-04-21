@@ -8,11 +8,9 @@ on:
     branches: [main,develop]
 jobs:
   build-wasm:
-    uses: EddyTheCo/Common/.github/workflows/build-wasm.yml@v0.5.0
+    uses: EddyTheCo/Common/.github/workflows/build-wasm.yml@qt_web_assembly
     with:
       qtModules: 'qtwebsockets qtshadertools'
-      qtVersion: '6.6.0'
-      emsdkVersion: '3.1.37'
       deploy_dev: ${{ (startsWith(github.base_ref, 'main'))&&(startsWith(github.head_ref, 'develop')) }}
 
   release-deploy:
