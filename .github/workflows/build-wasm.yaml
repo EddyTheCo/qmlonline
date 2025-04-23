@@ -8,7 +8,7 @@ on:
     branches: [main,develop]
 jobs:
   build-wasm:
-    uses: EddyTheCo/Common/.github/workflows/build-wasm.yml@qt_web_assembly
+    uses: EddyTheCo/Common/.github/workflows/build-wasm.yml@develop
     with:
       qtModules: 'qtwebsockets qtshadertools'
       deploy_dev: ${{ (startsWith(github.base_ref, 'main'))&&(startsWith(github.head_ref, 'develop')) }}
